@@ -1,0 +1,1092 @@
+{
+ "pagamentos": {
+  "2026-07__anderson": {
+   "mes": "2026-07",
+   "nome": "Anderson",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-07__aranha": {
+   "mes": "2026-07",
+   "nome": "Aranha",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-07__davidson": {
+   "mes": "2026-07",
+   "nome": "Davidson",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-07__deda": {
+   "mes": "2026-07",
+   "nome": "Deda",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-07__diego-suares": {
+   "mes": "2026-07",
+   "nome": "Diego Suares",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-07__diego": {
+   "mes": "2026-07",
+   "nome": "Diego",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-07__dirceu": {
+   "mes": "2026-07",
+   "nome": "Dirceu",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-07__elias": {
+   "mes": "2026-07",
+   "nome": "Elias",
+   "pago": true,
+   "tipo": "avulso",
+   "valor": 15
+  },
+  "2026-07__felipe": {
+   "mes": "2026-07",
+   "nome": "Felipe",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-07__fernando": {
+   "mes": "2026-07",
+   "nome": "Fernando",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-07__gilliard": {
+   "mes": "2026-07",
+   "nome": "Gilliard",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-07__igor": {
+   "mes": "2026-07",
+   "nome": "Igor",
+   "pago": true,
+   "tipo": "avulso",
+   "valor": 15
+  },
+  "2026-07__junior": {
+   "mes": "2026-07",
+   "nome": "Junior",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-07__leandro": {
+   "mes": "2026-07",
+   "nome": "Leandro",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-07__manica": {
+   "mes": "2026-07",
+   "nome": "Manica",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-07__marcao": {
+   "mes": "2026-07",
+   "nome": "Marcão",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-07__nando": {
+   "mes": "2026-07",
+   "nome": "Nando",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-07__neto": {
+   "mes": "2026-07",
+   "nome": "Neto",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 110
+  },
+  "2026-07__peterson": {
+   "mes": "2026-07",
+   "nome": "Peterson",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 60
+  },
+  "2026-07__rafael-n": {
+   "mes": "2026-07",
+   "nome": "Rafael N.",
+   "pago": true,
+   "tipo": "avulso",
+   "valor": 15
+  },
+  "2026-07__tl": {
+   "mes": "2026-07",
+   "nome": "TL",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-07__vinicius": {
+   "mes": "2026-07",
+   "nome": "Vinicius",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-08__amigo-do-liminha": {
+   "mes": "2026-08",
+   "nome": "Amigo do liminha",
+   "pago": true,
+   "tipo": "avulso",
+   "valor": 20
+  },
+  "2026-08__anderson": {
+   "mes": "2026-08",
+   "nome": "Anderson",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-08__aranha": {
+   "mes": "2026-08",
+   "nome": "Aranha",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-08__bahia-amigo-do-nando": {
+   "mes": "2026-08",
+   "nome": "Bahia (amigo do Nando)",
+   "pago": true,
+   "tipo": "avulso",
+   "valor": 20
+  },
+  "2026-08__caito": {
+   "mes": "2026-08",
+   "nome": "Caito",
+   "pago": true,
+   "tipo": "avulso",
+   "valor": 20
+  },
+  "2026-08__davidson": {
+   "mes": "2026-08",
+   "nome": "Davidson",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-08__deda": {
+   "mes": "2026-08",
+   "nome": "Deda",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-08__deddy": {
+   "mes": "2026-08",
+   "nome": "Deddy",
+   "pago": true,
+   "tipo": "avulso",
+   "valor": 20
+  },
+  "2026-08__diego-miller": {
+   "mes": "2026-08",
+   "nome": "Diego Miller",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-08__dirceu": {
+   "mes": "2026-08",
+   "nome": "Dirceu",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-08__elias": {
+   "mes": "2026-08",
+   "nome": "Elias",
+   "pago": true,
+   "tipo": "avulso",
+   "valor": 20
+  },
+  "2026-08__felipe": {
+   "mes": "2026-08",
+   "nome": "Felipe",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-08__fernando": {
+   "mes": "2026-08",
+   "nome": "Fernando",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-08__filho-do-ivan": {
+   "mes": "2026-08",
+   "nome": "Filho do Ivan",
+   "pago": true,
+   "tipo": "avulso",
+   "valor": 20
+  },
+  "2026-08__gilliard": {
+   "mes": "2026-08",
+   "nome": "Gilliard",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-08__henrique-filho-do-felipe": {
+   "mes": "2026-08",
+   "nome": "Henrique (filho do Felipe",
+   "pago": true,
+   "tipo": "avulso",
+   "valor": 20
+  },
+  "2026-08__ivan": {
+   "mes": "2026-08",
+   "nome": "Ivan",
+   "pago": true,
+   "tipo": "avulso",
+   "valor": 20
+  },
+  "2026-08__junior": {
+   "mes": "2026-08",
+   "nome": "Junior",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-08__leandro": {
+   "mes": "2026-08",
+   "nome": "Leandro",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-08__liminha": {
+   "mes": "2026-08",
+   "nome": "Liminha",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 30
+  },
+  "2026-08__lucas-amigo-do-severo": {
+   "mes": "2026-08",
+   "nome": "Lucas (amigo do Severo)",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-08__marcao": {
+   "mes": "2026-08",
+   "nome": "Marcão",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-08__nando": {
+   "mes": "2026-08",
+   "nome": "Nando",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-08__neto": {
+   "mes": "2026-08",
+   "nome": "Neto",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 0
+  },
+  "2026-08__peterson": {
+   "mes": "2026-08",
+   "nome": "Peterson",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-08__tl": {
+   "mes": "2026-08",
+   "nome": "TL",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 60
+  },
+  "2026-08__wando": {
+   "mes": "2026-08",
+   "nome": "Wando",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-09__amigo-deda": {
+   "mes": "2026-09",
+   "nome": "Amigo Deda",
+   "pago": true,
+   "tipo": "avulso",
+   "valor": 20
+  },
+  "2026-09__amigo-luciano": {
+   "mes": "2026-09",
+   "nome": "Amigo Luciano",
+   "pago": true,
+   "tipo": "avulso",
+   "valor": 20
+  },
+  "2026-09__anderson": {
+   "mes": "2026-09",
+   "nome": "Anderson",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-09__aranha": {
+   "mes": "2026-09",
+   "nome": "Aranha",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-09__bruno-tl": {
+   "mes": "2026-09",
+   "nome": "Bruno (TL)",
+   "pago": true,
+   "tipo": "avulso",
+   "valor": 20
+  },
+  "2026-09__caito": {
+   "mes": "2026-09",
+   "nome": "Caito",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-09__davidson": {
+   "mes": "2026-09",
+   "nome": "Davidson",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-09__deda": {
+   "mes": "2026-09",
+   "nome": "Deda",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-09__dedy": {
+   "mes": "2026-09",
+   "nome": "Dedy",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-09__diego-miller": {
+   "mes": "2026-09",
+   "nome": "Diego Miller",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-09__dirceu": {
+   "mes": "2026-09",
+   "nome": "Dirceu",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-09__elias": {
+   "mes": "2026-09",
+   "nome": "Elias",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-09__felipe": {
+   "mes": "2026-09",
+   "nome": "Felipe",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-09__fernando": {
+   "mes": "2026-09",
+   "nome": "Fernando",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-09__gilliard": {
+   "mes": "2026-09",
+   "nome": "Gilliard",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-09__guilherme-tio": {
+   "mes": "2026-09",
+   "nome": "Guilherme (Tio)",
+   "pago": true,
+   "tipo": "avulso",
+   "valor": 20
+  },
+  "2026-09__henrique": {
+   "mes": "2026-09",
+   "nome": "Henrique",
+   "pago": true,
+   "tipo": "avulso",
+   "valor": 20
+  },
+  "2026-09__henrique__muomz8yvlqeo": {
+   "mes": "2026-09",
+   "nome": "Henrique",
+   "pago": true,
+   "tipo": "avulso",
+   "valor": 20
+  },
+  "2026-09__hugo-deda": {
+   "mes": "2026-09",
+   "nome": "Hugo (Deda)",
+   "pago": true,
+   "tipo": "avulso",
+   "valor": 20
+  },
+  "2026-09__ithalo-maia": {
+   "mes": "2026-09",
+   "nome": "Ithalo Maia",
+   "pago": true,
+   "tipo": "avulso",
+   "valor": 20
+  },
+  "2026-09__ithalo-maia__muhmk1ovyllz": {
+   "mes": "2026-09",
+   "nome": "Ithalo Maia",
+   "pago": true,
+   "tipo": "avulso",
+   "valor": 20
+  },
+  "2026-09__ithalo-maia__muhmld5rccsi": {
+   "mes": "2026-09",
+   "nome": "Ithalo maia",
+   "pago": true,
+   "tipo": "avulso",
+   "valor": 20
+  },
+  "2026-09__junior": {
+   "mes": "2026-09",
+   "nome": "Junior",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-09__leandro": {
+   "mes": "2026-09",
+   "nome": "Leandro",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-09__liminha": {
+   "mes": "2026-09",
+   "nome": "Liminha",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 66
+  },
+  "2026-09__lincoln-elias__muomztzbwq1d": {
+   "mes": "2026-09",
+   "nome": "Lincoln (Elias)",
+   "pago": true,
+   "tipo": "avulso",
+   "valor": 20
+  },
+  "2026-09__marcao": {
+   "mes": "2026-09",
+   "nome": "Marcão",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-09__nando": {
+   "mes": "2026-09",
+   "nome": "Nando",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-09__patinha": {
+   "mes": "2026-09",
+   "nome": "Patinha",
+   "pago": true,
+   "tipo": "avulso",
+   "valor": 20
+  },
+  "2026-09__patinha__muomz3oc5h55": {
+   "mes": "2026-09",
+   "nome": "Patinha",
+   "pago": true,
+   "tipo": "avulso",
+   "valor": 20
+  },
+  "2026-09__peterson": {
+   "mes": "2026-09",
+   "nome": "Peterson",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-09__rafael": {
+   "mes": "2026-09",
+   "nome": "Rafael",
+   "pago": true,
+   "tipo": "avulso",
+   "valor": 20
+  },
+  "2026-09__serginho__muomzj66hg4y": {
+   "mes": "2026-09",
+   "nome": "Serginho",
+   "pago": true,
+   "tipo": "avulso",
+   "valor": 20
+  },
+  "2026-09__tl": {
+   "mes": "2026-09",
+   "nome": "TL",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-09__william": {
+   "mes": "2026-09",
+   "nome": "William",
+   "pago": true,
+   "tipo": "avulso",
+   "valor": 20
+  },
+  "2026-10__aldo": {
+   "mes": "2026-10",
+   "nome": "Aldo",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-10__amigo-do-sergio__mvi8o99nr5cj": {
+   "mes": "2026-10",
+   "nome": "amigo do Sergio",
+   "pago": true,
+   "tipo": "avulso",
+   "valor": 20
+  },
+  "2026-10__anderson": {
+   "mes": "2026-10",
+   "nome": "Anderson",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-10__aranha": {
+   "mes": "2026-10",
+   "nome": "Aranha",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-10__bruno": {
+   "mes": "2026-10",
+   "nome": "Bruno",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-10__caito": {
+   "mes": "2026-10",
+   "nome": "Caito",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-10__carioca__a27out01": {
+   "mes": "2026-10",
+   "nome": "Carioca",
+   "pago": true,
+   "tipo": "avulso",
+   "valor": 20
+  },
+  "2026-10__davidson": {
+   "mes": "2026-10",
+   "nome": "Davidson",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-10__deda": {
+   "mes": "2026-10",
+   "nome": "Deda",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-10__denys__mv2walx915fs": {
+   "mes": "2026-10",
+   "nome": "Denys",
+   "pago": true,
+   "tipo": "avulso",
+   "valor": 20
+  },
+  "2026-10__denys__mvh6jcaslzht": {
+   "mes": "2026-10",
+   "nome": "Denys",
+   "pago": false,
+   "tipo": "avulso",
+   "valor": 20
+  },
+  "2026-10__diego-miller": {
+   "mes": "2026-10",
+   "nome": "Diego Miller",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-10__dirceu": {
+   "mes": "2026-10",
+   "nome": "Dirceu",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-10__elias": {
+   "mes": "2026-10",
+   "nome": "Elias",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-10__felipe": {
+   "mes": "2026-10",
+   "nome": "Felipe",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-10__fernando": {
+   "mes": "2026-10",
+   "nome": "Fernando",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-10__gilliard": {
+   "mes": "2026-10",
+   "nome": "Gilliard",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 66
+  },
+  "2026-10__henrique-amigo-do-deda__a27out02": {
+   "mes": "2026-10",
+   "nome": "Henrique (amigo do Deda)",
+   "pago": true,
+   "tipo": "avulso",
+   "valor": 20
+  },
+  "2026-10__henrique": {
+   "mes": "2026-10",
+   "nome": "Henrique",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-10__jhonatan__mvh6t6j3y32r": {
+   "mes": "2026-10",
+   "nome": "Jhonatan",
+   "pago": true,
+   "tipo": "avulso",
+   "valor": 40
+  },
+  "2026-10__junior": {
+   "mes": "2026-10",
+   "nome": "Junior",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-10__leandro": {
+   "mes": "2026-10",
+   "nome": "Leandro",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-10__liminha": {
+   "mes": "2026-10",
+   "nome": "Liminha",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 25
+  },
+  "2026-10__marcao": {
+   "mes": "2026-10",
+   "nome": "Marcão",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-10__nando": {
+   "mes": "2026-10",
+   "nome": "Nando",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-10__patinha": {
+   "mes": "2026-10",
+   "nome": "Patinha",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-10__peterson": {
+   "mes": "2026-10",
+   "nome": "Peterson",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-10__serginho": {
+   "mes": "2026-10",
+   "nome": "Serginho",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-10__soares__mvi8oj5tzgeq": {
+   "mes": "2026-10",
+   "nome": "Soares",
+   "pago": true,
+   "tipo": "avulso",
+   "valor": 20
+  },
+  "2026-10__tl": {
+   "mes": "2026-10",
+   "nome": "TL",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-10__vilson__mvi8of3bpob9": {
+   "mes": "2026-10",
+   "nome": "Vilson",
+   "pago": false,
+   "tipo": "avulso",
+   "valor": 20
+  },
+  "2026-11__aldo": {
+   "mes": "2026-11",
+   "nome": "Aldo",
+   "pago": false,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-11__anderson": {
+   "mes": "2026-11",
+   "nome": "Anderson",
+   "pago": false,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-11__aranha": {
+   "mes": "2026-11",
+   "nome": "Aranha",
+   "pago": false,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-11__bruno": {
+   "mes": "2026-11",
+   "nome": "Bruno",
+   "pago": false,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-11__caito": {
+   "mes": "2026-11",
+   "nome": "Caito",
+   "pago": false,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-11__davidson": {
+   "mes": "2026-11",
+   "nome": "Davidson",
+   "pago": false,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-11__deda": {
+   "mes": "2026-11",
+   "nome": "Deda",
+   "pago": false,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-11__diego-miller": {
+   "mes": "2026-11",
+   "nome": "Diego Miller",
+   "pago": false,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-11__dirceu": {
+   "mes": "2026-11",
+   "nome": "Dirceu",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-11__elias": {
+   "mes": "2026-11",
+   "nome": "Elias",
+   "pago": false,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-11__felipe": {
+   "mes": "2026-11",
+   "nome": "Felipe",
+   "pago": false,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-11__fernando": {
+   "mes": "2026-11",
+   "nome": "Fernando",
+   "pago": false,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-11__gilliard": {
+   "mes": "2026-11",
+   "nome": "Gilliard",
+   "pago": false,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-11__henrique": {
+   "mes": "2026-11",
+   "nome": "Henrique",
+   "pago": false,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-11__junior": {
+   "mes": "2026-11",
+   "nome": "Junior",
+   "pago": false,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-11__leandro": {
+   "mes": "2026-11",
+   "nome": "Leandro",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-11__liminha": {
+   "mes": "2026-11",
+   "nome": "Liminha",
+   "pago": false,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-11__marcao": {
+   "mes": "2026-11",
+   "nome": "Marcão",
+   "pago": false,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-11__nando": {
+   "mes": "2026-11",
+   "nome": "Nando",
+   "pago": false,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-11__patinha": {
+   "mes": "2026-11",
+   "nome": "Patinha",
+   "pago": false,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-11__peterson": {
+   "mes": "2026-11",
+   "nome": "Peterson",
+   "pago": false,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-11__serginho": {
+   "mes": "2026-11",
+   "nome": "Serginho",
+   "pago": false,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-11__tl": {
+   "mes": "2026-11",
+   "nome": "TL",
+   "pago": false,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-12__dirceu": {
+   "mes": "2026-12",
+   "nome": "Dirceu",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-12__leandro": {
+   "mes": "2026-12",
+   "nome": "Leandro",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  }
+ },
+ "custosFixos": {
+  "2026-07": {
+   "bola": 180,
+   "bolaPago": true,
+   "juiz": 320,
+   "juizPago": true,
+   "mes": "2026-07",
+   "quadra": 750,
+   "quadraPago": true
+  },
+  "2026-08": {
+   "bola": 100,
+   "bolaPago": true,
+   "juiz": 320,
+   "juizPago": true,
+   "mes": "2026-08",
+   "quadra": 750,
+   "quadraPago": true
+  },
+  "2026-09": {
+   "bola": 80,
+   "bolaPago": true,
+   "juiz": 400,
+   "juizPago": true,
+   "mes": "2026-09",
+   "quadra": 750,
+   "quadraPago": true
+  },
+  "2026-10": {
+   "bola": 0,
+   "bolaPago": true,
+   "juiz": 320,
+   "juizPago": true,
+   "mes": "2026-10",
+   "quadra": 750,
+   "quadraPago": true
+  },
+  "2026-11": {
+   "bola": 200,
+   "bolaPago": false,
+   "juiz": 320,
+   "juizPago": false,
+   "mes": "2026-11",
+   "quadra": 750,
+   "quadraPago": false,
+   "semBola": false
+  },
+  "2026-12": {
+   "bola": 0,
+   "bolaPago": false,
+   "juiz": 320,
+   "juizPago": false,
+   "mes": "2026-12",
+   "quadra": 750,
+   "quadraPago": false,
+   "semBola": true
+  }
+ },
+ "config": {
+  "meses": {
+   "lista": [
+    "2026-07",
+    "2026-08",
+    "2026-09",
+    "2026-10",
+    "2026-11",
+    "2026-12"
+   ]
+  }
+ },
+ "times": {
+  "2026-07": {
+   "mes": "2026-07",
+   "timeA": [
+    "Andi",
+    "Caito",
+    "Marcão",
+    "Diego (miller)",
+    "Neto",
+    "Vinicius",
+    "Manica",
+    "Liminha",
+    "Davidson"
+   ],
+   "timeB": [
+    "Junior",
+    "Dirceu",
+    "TL",
+    "Aranha",
+    "Nando",
+    "Fernando",
+    "Leandro",
+    "Deda",
+    "Peterson"
+   ]
+  },
+  "2026-08": {
+   "mes": "2026-08",
+   "timeA": [],
+   "timeB": []
+  },
+  "2026-09": {
+   "mes": "2026-09",
+   "timeA": [],
+   "timeB": []
+  }
+ },
+ "atualizadoEm": "28/10/2026 22:25"
+}
