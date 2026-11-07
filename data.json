@@ -1539,7 +1539,8 @@
     "peterson": "b",
     "marcao": "b",
     "liminha": "b",
-    "tl": "b"
+    "tl": "b",
+    "elias": "r"
    },
    "fixos": [
     {
@@ -1560,5 +1561,5 @@
    ]
   }
  },
- "atualizadoEm": "07/11/2026 13:05"
+ "atualizadoEm": "07/11/2026 13:09"
 }
