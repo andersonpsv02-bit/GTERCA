@@ -277,7 +277,7 @@
   <section class="admin" id="admin" aria-label="Lançamentos" hidden>
     <form class="admin-row" id="member-form">
       <div class="field"><label for="m-tipo">Tipo</label>
-        <select id="m-tipo"><option value="mensal">Mensal</option><option value="avulso">Avulso</option></select></div>
+        <select id="m-tipo"><option value="mensal">Mensal</option><option value="avulso">Avulso</option><option value="uniforme">Uniforme (parcela)</option></select></div>
       <div class="field grow"><label for="m-nome">Nome</label><input type="text" id="m-nome" maxlength="60" placeholder="Nome do jogador" required></div>
       <div class="field small"><label for="m-valor">Valor (R$)</label><input type="number" id="m-valor" min="0" step="1" value="55"></div>
       <button type="submit" class="btn primary">Adicionar</button>
@@ -360,14 +360,22 @@
   var el = {};
   ["months","due","kpis","debts","admin","member-form","m-tipo","m-nome","m-valor","copy-prev-btn","escalar-btn","escalar","teams","avulsos","av-sub","costs","hist","storage-note"].forEach(function(id){ el[id] = document.getElementById(id); });
 
+  function uniDe(p){ if (!p || p.tipo !== "mensal") return null; var k = slug(p.nome); for (var i = 0; i < state.pagamentos.length; i++){ var u = state.pagamentos[i]; if (u.tipo === "uniforme" && u.mes === p.mes && slug(u.nome) === k) return u; } return null; }
+  function uniSoltos(m){ return pagsDo(m).filter(function(u){ return u.tipo === "uniforme" && !pagsDo(m).some(function(x){ return x.tipo === "mensal" && slug(x.nome) === slug(u.nome); }); }); }
   function pagsDo(m){ return state.pagamentos.filter(function(p){ return p.mes === m; }); }
-  function custosDo(m){ return Object.assign({quadra:0, quadraPago:false, juiz:0, juizPago:false, bola:0, bolaPago:false, semBola:false}, state.custos[m] || {}); }
+  function custosDo(m){ return Object.assign({quadra:0, quadraPago:false, juiz:0, juizPago:false, bola:0, bolaPago:false, semBola:false, uniforme:0, uniformePago:false}, state.custos[m] || {}); }
   function custoLinhas(c){
     var l = [{key:"quadra", label:"Quadra"}, {key:"juiz", label:"Juiz"}];
     if (!c.semBola) l.push({key:"bola", label:"Bola nova"});
+    if (c.uniforme > 0) l.push({key:"uniforme", label:"Uniformes River x Boca"});
     return l;
   }
   function pagoDe(c, key){
+    if (key === "uniforme"){
+      var base = (Array.isArray(c.uniformePagos) ? c.uniformePagos : []).reduce(function(a, v){ return a + (+v || 0); }, 0);
+      var parc = state.pagamentos.reduce(function(a, p){ return a + ((p.tipo === "uniforme" && p.pago) ? p.valor : 0); }, 0);
+      return Math.min(c.uniforme || 0, base + parc);
+    }
     var arr = c[key + "Pagos"];
     if (Array.isArray(arr) && arr.length) return arr.reduce(function(a, v){ return a + (+v || 0); }, 0);
     return c[key + "Pago"] ? (c[key] || 0) : 0;
@@ -435,9 +443,9 @@
 
   function renderKpis(){
     var m = state.current, pags = pagsDo(m);
-    var mens = 0, av = 0, aRec = 0, nPend = 0, nMensPago = 0, nAvPago = 0;
+    var mens = 0, av = 0, uni = 0, aRec = 0, nPend = 0, nMensPago = 0, nAvPago = 0;
     pags.forEach(function(p){
-      if (p.pago){ if (p.tipo === "avulso"){ av += p.valor; nAvPago++; } else { mens += p.valor; nMensPago++; } }
+      if (p.pago){ if (p.tipo === "avulso"){ av += p.valor; nAvPago++; } else if (p.tipo === "uniforme"){ uni += p.valor; } else { mens += p.valor; nMensPago++; } }
       else { aRec += p.valor; nPend++; }
     });
     var tot = custosTotal(m), pg = custosPagos(m);
@@ -445,7 +453,7 @@
     var saldo = saldoAcumulado(), adi = adiantados();
     var saldoSub = "desde julho" + (adi > 0 ? " · inclui " + brl(adi) + " adiantados" : "");
     el.kpis.innerHTML =
-      '<div class="kpi"><span class="label">Arrecadado</span><span class="v">'+brl(mens+av)+'</span><span class="s">'+brl(mens)+' mensal · '+brl(av)+' avulso</span></div>' +
+      '<div class="kpi"><span class="label">Arrecadado</span><span class="v">'+brl(mens+av+uni)+'</span><span class="s">'+brl(mens)+' mensal · '+brl(av)+' avulso'+(uni > 0 ? ' · '+brl(uni)+' uniforme' : '')+'</span></div>' +
       '<div class="kpi warn"><span class="label">A receber</span><span class="v">'+brl(aRec)+'</span><span class="s">'+(nPend === 0 ? "ninguém devendo neste mês" : nPend + (nPend === 1 ? " pagamento pendente" : " pagamentos pendentes"))+'</span></div>' +
       '<div class="kpi"><span class="label">Custos do mês</span><span class="v">'+brl(tot)+'</span><span class="s">'+custoSub+'</span></div>' +
       '<div class="kpi cash'+(saldo < 0 ? " neg" : "")+'"><span class="label">Saldo do caixa</span><span class="v">'+brl(saldo)+'</span><span class="s">'+esc(saldoSub)+'</span></div>';
@@ -464,12 +472,19 @@
   }
 
   function payControl(p){
-    var label = p.pago ? CHECK + "Pago" : "Pendente";
-    var cls = "chip " + (p.pago ? "ok" : "pend");
+    var u = uniDe(p), parcial = p.pago && u && !u.pago;
+    var label = parcial ? "Falta R$ 15" : (p.pago ? CHECK + "Pago" : "Pendente");
+    var cls = "chip " + (p.pago && !parcial ? "ok" : "pend");
     if (!state.canEdit) return '<span class="'+cls+'">'+label+'</span>';
     return '<button type="button" class="'+cls+'" data-act="pago" data-id="'+esc(p.id)+'" aria-label="'+esc(p.nome)+(p.pago ? ' pago, tocar para marcar pendente' : ' pendente, tocar para marcar pago')+'">'+label+'</button>';
   }
   function valControl(p){
+    var u = uniDe(p);
+    if (u){
+      var extra = '<small style="font-size:12px;color:var(--muted);font-weight:600;margin-left:4px">+ 15 unif.</small>';
+      if (!state.canEdit) return '<span class="val">'+brl(p.valor + u.valor)+'</span>';
+      return '<span class="val">R$<input class="val-input" type="number" min="0" step="1" value="'+p.valor+'" data-act="valor" data-id="'+esc(p.id)+'" aria-label="Mensalidade de '+esc(p.nome)+'">'+extra+'</span>';
+    }
     if (!state.canEdit) return '<span class="val">'+brl(p.valor)+'</span>';
     return '<span class="val">R$<input class="val-input" type="number" min="0" step="1" value="'+p.valor+'" data-act="valor" data-id="'+esc(p.id)+'" aria-label="Valor de '+esc(p.nome)+'"></span>';
   }
@@ -485,7 +500,7 @@
   }
   function resumo(list){
     var pagos = list.filter(function(p){ return p.pago; });
-    var tot = pagos.reduce(function(a,p){ return a + p.valor; }, 0);
+    var tot = pagos.reduce(function(a,p){ var u = uniDe(p); return a + p.valor + (u && u.pago ? u.valor : 0); }, 0);
     return list.length + (list.length === 1 ? " jogador" : " jogadores") + " · " + pagos.length + " de " + list.length + " pagaram · " + brl(tot);
   }
 
@@ -502,6 +517,11 @@
       if (sem.length) h += '<div class="card"><div class="team-head none"><div><h2 class="anton">Sem time</h2><span class="s muted">'+resumo(sem)+'</span></div></div>'+memberRows(sem)+'</div>';
     } else {
       h += '<div class="card" style="grid-column:1 / -1"><div class="team-head none"><div><h2 class="anton">Mensalistas</h2><span class="s muted">'+resumo(mens)+(mens.length ? ' · times ainda não escalados' : '')+'</span></div></div>'+memberRows(mens)+'</div>';
+    }
+    var uni = uniSoltos(m).sort(function(a,b){ return a.nome.localeCompare(b.nome, "pt-BR"); });
+    if (uni.length){
+      var parc = uni[0].parcela ? " · " + uni[0].parcela + "ª parcela" : "";
+      h += '<div class="card" style="grid-column:1 / -1"><div class="team-head none"><div><h2 class="anton">Parcela do uniforme'+parc+'</h2><span class="s muted">'+resumo(uni)+' · mensalidade deste mês ainda não lançada</span></div></div>'+memberRows(uni)+'</div>';
     }
     el.teams.innerHTML = h;
   }
@@ -541,7 +561,7 @@
       var status = pg >= val && val > 0 ? '<span class="chip ok">'+CHECK+'Pago</span>'
         : (pg > 0 ? '<span class="chip pend">Pago '+brl(pg)+'</span>' : '<span class="chip pend">Pendente</span>');
       if (state.canEdit && !arr.length) status = '<button type="button" class="chip '+(pg >= val && val > 0 ? "ok" : "pend")+'" data-act="custoPago" data-key="'+d.key+'Pago" aria-label="Marcar '+d.label+' como pago no total">'+(pg >= val && val > 0 ? CHECK + "Pago" : "Pendente")+'</button>';
-      var hint = d.key === "juiz" ? "R$ 80 por terça · " + tercas(m) + " terças no mês" : (d.key === "bola" ? "valor do mês" : "total do mês");
+      var hint = d.key === "juiz" ? "R$ 80 por terça · " + tercas(m) + " terças no mês" : (d.key === "bola" ? "valor do mês" : (d.key === "uniforme" ? (c.uniformeObs || "compra do mês") : "total do mês"));
       var v = state.canEdit
         ? '<span class="v">R$<input class="val-input" type="number" min="0" step="1" value="'+val+'" data-act="custo" data-key="'+d.key+'" aria-label="Total do mês de '+d.label+'"></span>'
         : '<span class="v">'+brl(val)+'</span>';
@@ -607,9 +627,9 @@
 
   /* ---------- data actions ---------- */
   function findPag(id){ for (var i = 0; i < state.pagamentos.length; i++) if (state.pagamentos[i].id === id) return state.pagamentos[i]; return null; }
-  function savePag(p){ if (!state.db) return; state.db.doc("pagamentos/" + p.id).set({mes:p.mes, nome:p.nome, tipo:p.tipo, valor:p.valor, pago:p.pago}).catch(function(){}); }
+  function savePag(p){ if (!state.db) return; var doc = {mes:p.mes, nome:p.nome, tipo:p.tipo, valor:p.valor, pago:p.pago}; if (p.parcela) doc.parcela = p.parcela; state.db.doc("pagamentos/" + p.id).set(doc).catch(function(){}); }
   function addPag(mes, nome, tipo, valor){
-    var id = tipo === "avulso" ? (mes + "__" + slug(nome) + "__" + uid()) : (mes + "__" + slug(nome));
+    var id = tipo !== "mensal" ? (mes + "__" + slug(nome) + "__" + uid()) : (mes + "__" + slug(nome));
     savePag({id:id, mes:mes, nome:nome, tipo:tipo, valor:valor, pago:false});
   }
   function saveCustos(m, patch){
@@ -643,7 +663,7 @@
     var t = e.target.closest("[data-act]");
     if (!t || !state.canEdit) return;
     var act = t.getAttribute("data-act"), m = state.current;
-    if (act === "pago"){ var p = findPag(t.getAttribute("data-id")); if (p){ p.pago = !p.pago; savePag(p); renderAll(); } }
+    if (act === "pago"){ var p = findPag(t.getAttribute("data-id")); var u0 = uniDe(p); if (p && u0 && p.pago && !u0.pago){ u0.pago = true; savePag(u0); renderAll(); return; } if (p){ p.pago = !p.pago; savePag(p); var uu = uniDe(p); if (uu && uu.pago !== p.pago){ uu.pago = p.pago; savePag(uu); } renderAll(); } }
     else if (act === "del"){ var d = findPag(t.getAttribute("data-id")); if (d && state.db) state.db.doc("pagamentos/" + d.id).delete().catch(function(){}); }
     else if (act === "custoPago"){ var k = t.getAttribute("data-key"), patch = {}; patch[k] = !custosDo(m)[k]; saveCustos(m, patch); }
     else if (act === "semBola"){ saveCustos(m, {semBola:true}); }
@@ -687,7 +707,7 @@
     if (act === "valor"){ var p = findPag(t.getAttribute("data-id")); if (p){ p.valor = v; savePag(p); } }
     else if (act === "custo"){ var patch = {}; patch[t.getAttribute("data-key")] = v; saveCustos(state.current, patch); }
   });
-  el["m-tipo"].addEventListener("change", function(){ el["m-valor"].value = el["m-tipo"].value === "avulso" ? 20 : 55; });
+  el["m-tipo"].addEventListener("change", function(){ var tv = el["m-tipo"].value; el["m-valor"].value = tv === "avulso" ? 20 : (tv === "uniforme" ? 15 : 55); });
   el["member-form"].addEventListener("submit", function(e){
     e.preventDefault();
     var nome = el["m-nome"].value.trim(), v = parseFloat(el["m-valor"].value);
@@ -717,7 +737,7 @@
       db.collection("pagamentos").onSnapshot(function(snap){
         state.pagamentos = snap.docs.map(function(d){
           var x = d.data() || {};
-          return { id:d.id, mes:x.mes, nome:x.nome || "?", tipo:x.tipo === "avulso" ? "avulso" : "mensal", valor:typeof x.valor === "number" ? x.valor : 0, pago:!!x.pago };
+          return { id:d.id, mes:x.mes, nome:x.nome || "?", tipo:x.tipo === "avulso" ? "avulso" : (x.tipo === "uniforme" ? "uniforme" : "mensal"), parcela:x.parcela || null, valor:typeof x.valor === "number" ? x.valor : 0, pago:!!x.pago };
         });
         renderAll();
       }, function(){});
@@ -735,6 +755,7 @@
   boot();
 })();
 </script>
+
 
 </body>
 </html>

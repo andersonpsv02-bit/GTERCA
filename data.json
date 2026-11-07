@@ -798,6 +798,13 @@
    "tipo": "mensal",
    "valor": 55
   },
+  "2026-10__vanderlei__a03nov01": {
+   "mes": "2026-10",
+   "nome": "Wanderley (Neto)",
+   "pago": true,
+   "tipo": "avulso",
+   "valor": 20
+  },
   "2026-10__vilson__mvi8of3bpob9": {
    "mes": "2026-10",
    "nome": "Vilson",
@@ -808,9 +815,17 @@
   "2026-11__aldo": {
    "mes": "2026-11",
    "nome": "Aldo",
-   "pago": false,
+   "pago": true,
    "tipo": "mensal",
    "valor": 55
+  },
+  "2026-11__aldo__unif1": {
+   "mes": "2026-11",
+   "nome": "Aldo",
+   "pago": true,
+   "parcela": 1,
+   "tipo": "uniforme",
+   "valor": 15
   },
   "2026-11__anderson": {
    "mes": "2026-11",
@@ -819,12 +834,28 @@
    "tipo": "mensal",
    "valor": 55
   },
+  "2026-11__anderson__unif1": {
+   "mes": "2026-11",
+   "nome": "Anderson",
+   "pago": false,
+   "parcela": 1,
+   "tipo": "uniforme",
+   "valor": 15
+  },
   "2026-11__aranha": {
    "mes": "2026-11",
    "nome": "Aranha",
    "pago": false,
    "tipo": "mensal",
    "valor": 55
+  },
+  "2026-11__aranha__unif1": {
+   "mes": "2026-11",
+   "nome": "Aranha",
+   "pago": false,
+   "parcela": 1,
+   "tipo": "uniforme",
+   "valor": 15
   },
   "2026-11__bruno": {
    "mes": "2026-11",
@@ -833,12 +864,42 @@
    "tipo": "mensal",
    "valor": 55
   },
+  "2026-11__bruno__unif1": {
+   "mes": "2026-11",
+   "nome": "Bruno",
+   "pago": false,
+   "parcela": 1,
+   "tipo": "uniforme",
+   "valor": 15
+  },
   "2026-11__caito": {
    "mes": "2026-11",
    "nome": "Caito",
    "pago": false,
    "tipo": "mensal",
    "valor": 55
+  },
+  "2026-11__caito__unif1": {
+   "mes": "2026-11",
+   "nome": "Caito",
+   "pago": false,
+   "parcela": 1,
+   "tipo": "uniforme",
+   "valor": 15
+  },
+  "2026-11__carioca__av0311h": {
+   "mes": "2026-11",
+   "nome": "Carioca",
+   "pago": false,
+   "tipo": "avulso",
+   "valor": 20
+  },
+  "2026-11__danilo__av0311b": {
+   "mes": "2026-11",
+   "nome": "Duff",
+   "pago": true,
+   "tipo": "avulso",
+   "valor": 20
   },
   "2026-11__davidson": {
    "mes": "2026-11",
@@ -847,12 +908,28 @@
    "tipo": "mensal",
    "valor": 55
   },
+  "2026-11__davidson__unif1": {
+   "mes": "2026-11",
+   "nome": "Davidson",
+   "pago": false,
+   "parcela": 1,
+   "tipo": "uniforme",
+   "valor": 15
+  },
   "2026-11__deda": {
    "mes": "2026-11",
    "nome": "Deda",
    "pago": false,
    "tipo": "mensal",
    "valor": 55
+  },
+  "2026-11__deda__unif1": {
+   "mes": "2026-11",
+   "nome": "Deda",
+   "pago": false,
+   "parcela": 1,
+   "tipo": "uniforme",
+   "valor": 15
   },
   "2026-11__diego-miller": {
    "mes": "2026-11",
@@ -861,12 +938,28 @@
    "tipo": "mensal",
    "valor": 55
   },
+  "2026-11__diego-miller__unif1": {
+   "mes": "2026-11",
+   "nome": "Diego Miller",
+   "pago": false,
+   "parcela": 1,
+   "tipo": "uniforme",
+   "valor": 15
+  },
   "2026-11__dirceu": {
    "mes": "2026-11",
    "nome": "Dirceu",
    "pago": true,
    "tipo": "mensal",
    "valor": 55
+  },
+  "2026-11__dirceu__unif1": {
+   "mes": "2026-11",
+   "nome": "Dirceu",
+   "pago": true,
+   "parcela": 1,
+   "tipo": "uniforme",
+   "valor": 15
   },
   "2026-11__elias": {
    "mes": "2026-11",
@@ -875,12 +968,28 @@
    "tipo": "mensal",
    "valor": 55
   },
+  "2026-11__elias__unif1": {
+   "mes": "2026-11",
+   "nome": "Elias",
+   "pago": false,
+   "parcela": 1,
+   "tipo": "uniforme",
+   "valor": 15
+  },
   "2026-11__felipe": {
    "mes": "2026-11",
    "nome": "Felipe",
-   "pago": false,
+   "pago": true,
    "tipo": "mensal",
    "valor": 55
+  },
+  "2026-11__felipe__unif1": {
+   "mes": "2026-11",
+   "nome": "Felipe",
+   "pago": true,
+   "parcela": 1,
+   "tipo": "uniforme",
+   "valor": 15
   },
   "2026-11__fernando": {
    "mes": "2026-11",
@@ -889,12 +998,35 @@
    "tipo": "mensal",
    "valor": 55
   },
+  "2026-11__fernando__unif1": {
+   "mes": "2026-11",
+   "nome": "Fernando",
+   "pago": false,
+   "parcela": 1,
+   "tipo": "uniforme",
+   "valor": 15
+  },
+  "2026-11__garcia__av0311g": {
+   "mes": "2026-11",
+   "nome": "Garcia",
+   "pago": false,
+   "tipo": "avulso",
+   "valor": 20
+  },
   "2026-11__gilliard": {
    "mes": "2026-11",
    "nome": "Gilliard",
    "pago": false,
    "tipo": "mensal",
    "valor": 55
+  },
+  "2026-11__gilliard__unif1": {
+   "mes": "2026-11",
+   "nome": "Gilliard",
+   "pago": false,
+   "parcela": 1,
+   "tipo": "uniforme",
+   "valor": 15
   },
   "2026-11__henrique": {
    "mes": "2026-11",
@@ -903,12 +1035,42 @@
    "tipo": "mensal",
    "valor": 55
   },
+  "2026-11__henrique__av0311a": {
+   "mes": "2026-11",
+   "nome": "Nicanor",
+   "pago": true,
+   "tipo": "avulso",
+   "valor": 20
+  },
+  "2026-11__henrique__unif1": {
+   "mes": "2026-11",
+   "nome": "Henrique",
+   "pago": false,
+   "parcela": 1,
+   "tipo": "uniforme",
+   "valor": 15
+  },
+  "2026-11__ithalo__av0311f": {
+   "mes": "2026-11",
+   "nome": "Ithalo",
+   "pago": true,
+   "tipo": "avulso",
+   "valor": 20
+  },
   "2026-11__junior": {
    "mes": "2026-11",
    "nome": "Junior",
    "pago": false,
    "tipo": "mensal",
    "valor": 55
+  },
+  "2026-11__junior__unif1": {
+   "mes": "2026-11",
+   "nome": "Junior",
+   "pago": false,
+   "parcela": 1,
+   "tipo": "uniforme",
+   "valor": 15
   },
   "2026-11__leandro": {
    "mes": "2026-11",
@@ -917,12 +1079,28 @@
    "tipo": "mensal",
    "valor": 55
   },
+  "2026-11__leandro__unif1": {
+   "mes": "2026-11",
+   "nome": "Leandro",
+   "pago": false,
+   "parcela": 1,
+   "tipo": "uniforme",
+   "valor": 15
+  },
   "2026-11__liminha": {
    "mes": "2026-11",
    "nome": "Liminha",
    "pago": false,
    "tipo": "mensal",
    "valor": 55
+  },
+  "2026-11__liminha__unif1": {
+   "mes": "2026-11",
+   "nome": "Liminha",
+   "pago": false,
+   "parcela": 1,
+   "tipo": "uniforme",
+   "valor": 15
   },
   "2026-11__marcao": {
    "mes": "2026-11",
@@ -931,12 +1109,28 @@
    "tipo": "mensal",
    "valor": 55
   },
+  "2026-11__marcao__unif1": {
+   "mes": "2026-11",
+   "nome": "Marcão",
+   "pago": false,
+   "parcela": 1,
+   "tipo": "uniforme",
+   "valor": 15
+  },
   "2026-11__nando": {
    "mes": "2026-11",
    "nome": "Nando",
    "pago": false,
    "tipo": "mensal",
    "valor": 55
+  },
+  "2026-11__nando__unif1": {
+   "mes": "2026-11",
+   "nome": "Nando",
+   "pago": false,
+   "parcela": 1,
+   "tipo": "uniforme",
+   "valor": 15
   },
   "2026-11__patinha": {
    "mes": "2026-11",
@@ -945,12 +1139,28 @@
    "tipo": "mensal",
    "valor": 55
   },
+  "2026-11__patinha__unif1": {
+   "mes": "2026-11",
+   "nome": "Patinha",
+   "pago": false,
+   "parcela": 1,
+   "tipo": "uniforme",
+   "valor": 15
+  },
   "2026-11__peterson": {
    "mes": "2026-11",
    "nome": "Peterson",
    "pago": false,
    "tipo": "mensal",
    "valor": 55
+  },
+  "2026-11__peterson__unif1": {
+   "mes": "2026-11",
+   "nome": "Peterson",
+   "pago": false,
+   "parcela": 1,
+   "tipo": "uniforme",
+   "valor": 15
   },
   "2026-11__serginho": {
    "mes": "2026-11",
@@ -959,12 +1169,121 @@
    "tipo": "mensal",
    "valor": 55
   },
+  "2026-11__serginho__unif1": {
+   "mes": "2026-11",
+   "nome": "Serginho",
+   "pago": false,
+   "parcela": 1,
+   "tipo": "uniforme",
+   "valor": 15
+  },
+  "2026-11__suarez__av0311d": {
+   "mes": "2026-11",
+   "nome": "Suárez",
+   "pago": true,
+   "tipo": "avulso",
+   "valor": 20
+  },
   "2026-11__tl": {
    "mes": "2026-11",
    "nome": "TL",
    "pago": false,
    "tipo": "mensal",
    "valor": 55
+  },
+  "2026-11__tl__unif1": {
+   "mes": "2026-11",
+   "nome": "TL",
+   "pago": false,
+   "parcela": 1,
+   "tipo": "uniforme",
+   "valor": 15
+  },
+  "2026-11__vinicius__av0311c": {
+   "mes": "2026-11",
+   "nome": "Vinicius",
+   "pago": true,
+   "tipo": "avulso",
+   "valor": 20
+  },
+  "2026-11__wanderley-neto__av0311e": {
+   "mes": "2026-11",
+   "nome": "Wanderley (Neto)",
+   "pago": true,
+   "tipo": "avulso",
+   "valor": 20
+  },
+  "2026-11__wanderley-neto__unif0311": {
+   "mes": "2026-11",
+   "nome": "Wanderley (Neto)",
+   "pago": true,
+   "parcela": 1,
+   "tipo": "uniforme",
+   "valor": 30
+  },
+  "2026-12__aldo__unif2": {
+   "mes": "2026-12",
+   "nome": "Aldo",
+   "pago": true,
+   "parcela": 2,
+   "tipo": "uniforme",
+   "valor": 15
+  },
+  "2026-12__anderson__unif2": {
+   "mes": "2026-12",
+   "nome": "Anderson",
+   "pago": false,
+   "parcela": 2,
+   "tipo": "uniforme",
+   "valor": 15
+  },
+  "2026-12__aranha__unif2": {
+   "mes": "2026-12",
+   "nome": "Aranha",
+   "pago": false,
+   "parcela": 2,
+   "tipo": "uniforme",
+   "valor": 15
+  },
+  "2026-12__bruno__unif2": {
+   "mes": "2026-12",
+   "nome": "Bruno",
+   "pago": false,
+   "parcela": 2,
+   "tipo": "uniforme",
+   "valor": 15
+  },
+  "2026-12__caito__unif2": {
+   "mes": "2026-12",
+   "nome": "Caito",
+   "pago": false,
+   "parcela": 2,
+   "tipo": "uniforme",
+   "valor": 15
+  },
+  "2026-12__davidson__unif2": {
+   "mes": "2026-12",
+   "nome": "Davidson",
+   "pago": false,
+   "parcela": 2,
+   "tipo": "uniforme",
+   "valor": 15
+  },
+  "2026-12__deda__unif2": {
+   "mes": "2026-12",
+   "nome": "Deda",
+   "pago": false,
+   "parcela": 2,
+   "tipo": "uniforme",
+   "valor": 15
+  },
+  "2026-12__diego-miller__unif2": {
+   "mes": "2026-12",
+   "nome": "Diego Miller",
+   "pago": false,
+   "parcela": 2,
+   "tipo": "uniforme",
+   "valor": 15
   },
   "2026-12__dirceu": {
    "mes": "2026-12",
@@ -973,12 +1292,132 @@
    "tipo": "mensal",
    "valor": 55
   },
+  "2026-12__dirceu__unif2": {
+   "mes": "2026-12",
+   "nome": "Dirceu",
+   "pago": true,
+   "parcela": 2,
+   "tipo": "uniforme",
+   "valor": 15
+  },
+  "2026-12__elias__unif2": {
+   "mes": "2026-12",
+   "nome": "Elias",
+   "pago": false,
+   "parcela": 2,
+   "tipo": "uniforme",
+   "valor": 15
+  },
+  "2026-12__felipe__unif2": {
+   "mes": "2026-12",
+   "nome": "Felipe",
+   "pago": true,
+   "parcela": 2,
+   "tipo": "uniforme",
+   "valor": 15
+  },
+  "2026-12__fernando__unif2": {
+   "mes": "2026-12",
+   "nome": "Fernando",
+   "pago": false,
+   "parcela": 2,
+   "tipo": "uniforme",
+   "valor": 15
+  },
+  "2026-12__gilliard__unif2": {
+   "mes": "2026-12",
+   "nome": "Gilliard",
+   "pago": false,
+   "parcela": 2,
+   "tipo": "uniforme",
+   "valor": 15
+  },
+  "2026-12__henrique__unif2": {
+   "mes": "2026-12",
+   "nome": "Henrique",
+   "pago": false,
+   "parcela": 2,
+   "tipo": "uniforme",
+   "valor": 15
+  },
+  "2026-12__junior__unif2": {
+   "mes": "2026-12",
+   "nome": "Junior",
+   "pago": false,
+   "parcela": 2,
+   "tipo": "uniforme",
+   "valor": 15
+  },
   "2026-12__leandro": {
    "mes": "2026-12",
    "nome": "Leandro",
    "pago": true,
    "tipo": "mensal",
    "valor": 55
+  },
+  "2026-12__leandro__unif2": {
+   "mes": "2026-12",
+   "nome": "Leandro",
+   "pago": false,
+   "parcela": 2,
+   "tipo": "uniforme",
+   "valor": 15
+  },
+  "2026-12__liminha__unif2": {
+   "mes": "2026-12",
+   "nome": "Liminha",
+   "pago": false,
+   "parcela": 2,
+   "tipo": "uniforme",
+   "valor": 15
+  },
+  "2026-12__marcao__unif2": {
+   "mes": "2026-12",
+   "nome": "Marcão",
+   "pago": false,
+   "parcela": 2,
+   "tipo": "uniforme",
+   "valor": 15
+  },
+  "2026-12__nando__unif2": {
+   "mes": "2026-12",
+   "nome": "Nando",
+   "pago": false,
+   "parcela": 2,
+   "tipo": "uniforme",
+   "valor": 15
+  },
+  "2026-12__patinha__unif2": {
+   "mes": "2026-12",
+   "nome": "Patinha",
+   "pago": false,
+   "parcela": 2,
+   "tipo": "uniforme",
+   "valor": 15
+  },
+  "2026-12__peterson__unif2": {
+   "mes": "2026-12",
+   "nome": "Peterson",
+   "pago": false,
+   "parcela": 2,
+   "tipo": "uniforme",
+   "valor": 15
+  },
+  "2026-12__serginho__unif2": {
+   "mes": "2026-12",
+   "nome": "Serginho",
+   "pago": false,
+   "parcela": 2,
+   "tipo": "uniforme",
+   "valor": 15
+  },
+  "2026-12__tl__unif2": {
+   "mes": "2026-12",
+   "nome": "TL",
+   "pago": false,
+   "parcela": 2,
+   "tipo": "uniforme",
+   "valor": 15
   }
  },
  "custosFixos": {
@@ -1023,10 +1462,19 @@
    "bolaPago": false,
    "juiz": 320,
    "juizPago": false,
+   "juizPagos": [
+    80
+   ],
    "mes": "2026-11",
    "quadra": 750,
    "quadraPago": false,
-   "semBola": false
+   "semBola": false,
+   "uniforme": 960,
+   "uniformeObs": "R$ 200 pagos pelo caixa · restante pago conforme as parcelas de R$ 15 (nov e dez)",
+   "uniformePago": false,
+   "uniformePagos": [
+    200
+   ]
   },
   "2026-12": {
    "bola": 0,
@@ -1088,5 +1536,5 @@
    "timeB": []
   }
  },
- "atualizadoEm": "28/10/2026 22:25"
+ "atualizadoEm": "07/11/2026 12:14"
 }
