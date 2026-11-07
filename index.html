@@ -72,7 +72,12 @@
   .due .count span{font-size:13px; color:#C7CBD2;}
 
   /* ---------- kpis ---------- */
-  .kpis{display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:14px;}
+  .kpis{display:grid; grid-template-columns:repeat(auto-fit, minmax(190px, 1fr)); gap:14px;}
+  .kpi.res.pos .v{color:var(--ok);}
+  .kpi.res.neg .v{color:var(--bad);}
+  .kpi.res .tag{align-self:flex-start; font-size:11px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; border-radius:999px; padding:3px 9px;}
+  .kpi.res.pos .tag{background:var(--ok-bg); color:var(--ok);}
+  .kpi.res.neg .tag{background:#FBE3E1; color:var(--bad);}
   .kpi{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:18px 20px; display:flex; flex-direction:column; gap:6px; min-width:0;}
   .kpi .v{font-size:30px; font-weight:800; line-height:1.1;}
   .kpi .s{font-size:13px; color:var(--muted);}
@@ -450,12 +455,14 @@
     });
     var tot = custosTotal(m), pg = custosPagos(m);
     var custoSub = tot === 0 ? "sem custos lançados" : (pg === 0 ? "nada pago ainda" : (pg >= tot ? "tudo pago" : brl(pg) + " já pagos"));
+    var arr = mens + av + uni, res = arr - pg;
     var saldo = saldoAcumulado(), adi = adiantados();
     var saldoSub = "desde julho" + (adi > 0 ? " · inclui " + brl(adi) + " adiantados" : "");
     el.kpis.innerHTML =
       '<div class="kpi"><span class="label">Arrecadado</span><span class="v">'+brl(mens+av+uni)+'</span><span class="s">'+brl(mens)+' mensal · '+brl(av)+' avulso'+(uni > 0 ? ' · '+brl(uni)+' uniforme' : '')+'</span></div>' +
       '<div class="kpi warn"><span class="label">A receber</span><span class="v">'+brl(aRec)+'</span><span class="s">'+(nPend === 0 ? "ninguém devendo neste mês" : nPend + (nPend === 1 ? " pagamento pendente" : " pagamentos pendentes"))+'</span></div>' +
       '<div class="kpi"><span class="label">Custos do mês</span><span class="v">'+brl(tot)+'</span><span class="s">'+custoSub+'</span></div>' +
+      '<div class="kpi res '+(res >= 0 ? "pos" : "neg")+'"><span class="label">Resultado do mês</span><span class="v">'+(res > 0 ? "+ " : "")+brl(res)+'</span><span class="tag">'+(res >= 0 ? "Lucro" : "Déficit")+'</span><span class="s">'+brl(arr)+' arrecadado − '+brl(pg)+' de custos pagos</span></div>' +
       '<div class="kpi cash'+(saldo < 0 ? " neg" : "")+'"><span class="label">Saldo do caixa</span><span class="v">'+brl(saldo)+'</span><span class="s">'+esc(saldoSub)+'</span></div>';
   }
 

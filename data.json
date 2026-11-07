@@ -872,21 +872,6 @@
    "tipo": "uniforme",
    "valor": 15
   },
-  "2026-11__caito": {
-   "mes": "2026-11",
-   "nome": "Caito",
-   "pago": false,
-   "tipo": "mensal",
-   "valor": 55
-  },
-  "2026-11__caito__unif1": {
-   "mes": "2026-11",
-   "nome": "Caito",
-   "pago": false,
-   "parcela": 1,
-   "tipo": "uniforme",
-   "valor": 15
-  },
   "2026-11__carioca__av0311h": {
    "mes": "2026-11",
    "nome": "Carioca",
@@ -1253,14 +1238,6 @@
    "tipo": "uniforme",
    "valor": 15
   },
-  "2026-12__caito__unif2": {
-   "mes": "2026-12",
-   "nome": "Caito",
-   "pago": false,
-   "parcela": 2,
-   "tipo": "uniforme",
-   "valor": 15
-  },
   "2026-12__davidson__unif2": {
    "mes": "2026-12",
    "nome": "Davidson",
@@ -1536,5 +1513,5 @@
    "timeB": []
   }
  },
- "atualizadoEm": "07/11/2026 12:14"
+ "atualizadoEm": "07/11/2026 12:34"
 }
