@@ -138,6 +138,18 @@
   .empty strong{font-size:15px;}
   .empty span{font-size:13px; color:var(--muted); line-height:1.45;}
 
+  #teams{grid-template-columns:repeat(auto-fit, minmax(min(100%, 440px), 1fr));}
+  .uni-sum{display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:10px; margin-bottom:14px;}
+  .uni-sum > div{background:var(--bg); border-radius:12px; padding:12px 14px; display:flex; flex-direction:column; gap:2px;}
+  .uni-sum b{font-size:20px; font-weight:800;}
+  .uni-sum b.warn{color:var(--warn);} .uni-sum b.okc{color:var(--ok);}
+  .uni-sum small{font-size:12px; color:var(--muted);}
+  .uni-table{display:grid; grid-template-columns:repeat(auto-fill, minmax(320px, 1fr)); column-gap:24px;}
+  .uni-row{display:grid; grid-template-columns:minmax(0,1fr) repeat(var(--cols,2), 104px); gap:8px; align-items:center; padding:7px 0; border-bottom:1px solid var(--line-soft); font-size:14px;}
+  .uni-row .nome{font-weight:500; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .uni-th{font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--muted);}
+  .uni-row .game{display:inline-flex; align-items:center; gap:4px; min-width:100px; justify-content:center;}
+  .uni-row .game svg{width:12px; height:12px;}
   .games{display:flex; flex-wrap:wrap; gap:6px; justify-content:flex-end;}
   .game{min-height:32px; padding:0 10px; border:0; border-radius:8px; font-size:12.5px; font-weight:700; cursor:pointer;}
   .game.ok{background:var(--ok-bg); color:var(--ok);}
@@ -303,6 +315,8 @@
 
   <section class="grid2" id="teams" aria-label="Mensalistas"></section>
 
+  <section class="card card-pad" id="uniformes" aria-label="Uniformes" hidden></section>
+
   <div class="grid2">
     <section class="card card-pad" aria-label="Avulsos">
       <div class="card-head"><h2 class="anton">Avulsos</h2><span class="muted" style="font-size:13px" id="av-sub">R$ 20 por jogo</span></div>
@@ -395,6 +409,8 @@
   function tercas(m){ var p = m.split("-"), y = +p[0], mo = +p[1] - 1, n = 0; for (var d = new Date(y, mo, 1); d.getMonth() === mo; d.setDate(d.getDate() + 1)) if (d.getDay() === 2) n++; return n; }
   function custosPagos(m){ var c = custosDo(m); return custoLinhas(c).reduce(function(a, d){ return a + pagoDe(c, d.key); }, 0); }
   function custosTotal(m){ var c = custosDo(m); return custoLinhas(c).reduce(function(a, d){ return a + (c[d.key] || 0); }, 0); }
+  function fixosTotal(m){ var c = custosDo(m); return custoLinhas(c).filter(function(d){ return d.key !== "uniforme"; }).reduce(function(a, d){ return a + (c[d.key] || 0); }, 0); }
+  function fixosPagos(m){ var c = custosDo(m); return custoLinhas(c).filter(function(d){ return d.key !== "uniforme"; }).reduce(function(a, d){ return a + pagoDe(c, d.key); }, 0); }
   function arrecadado(m){ return pagsDo(m).reduce(function(a, p){ return a + (p.pago ? p.valor : 0); }, 0); }
   function defaultMonth(lista){
     var s = lista.slice().sort(), t = todayMonth();
@@ -460,8 +476,8 @@
       if (p.pago){ if (p.tipo === "avulso"){ av += p.valor; nAvPago++; } else if (p.tipo === "uniforme"){ uni += p.valor; } else { mens += p.valor; nMensPago++; } }
       else { aRec += p.valor; nPend++; }
     });
-    var tot = custosTotal(m), pg = custosPagos(m);
-    var custoSub = tot === 0 ? "sem custos lançados" : (pg === 0 ? "nada pago ainda" : (pg >= tot ? "tudo pago" : brl(pg) + " já pagos"));
+    var tot = fixosTotal(m), pg = custosPagos(m), pgFix = fixosPagos(m), pgUni = pg - pgFix;
+    var custoSub = (tot === 0 ? "sem custos lançados" : (pgFix === 0 ? "nada pago ainda" : (pgFix >= tot ? "tudo pago" : brl(pgFix) + " já pagos"))) + " · quadra, juiz e bola";
     var arr = mens + av + uni, res = arr - pg;
     var saldo = saldoAcumulado(), adi = adiantados();
     var saldoSub = "desde julho" + (adi > 0 ? " · inclui " + brl(adi) + " adiantados" : "");
@@ -485,7 +501,7 @@
       '<div class="kpi"><span class="label">Arrecadado</span><span class="v">'+brl(mens+av+uni)+'</span><span class="s">'+brl(mens)+' mensal · '+brl(av)+' avulso'+(uni > 0 ? ' · '+brl(uni)+' uniforme' : '')+'</span></div>' +
       '<div class="kpi warn"><span class="label">A receber</span><span class="v">'+brl(aRec)+'</span><span class="s">'+(nPend === 0 ? "ninguém devendo neste mês" : nPend + (nPend === 1 ? " pagamento pendente" : " pagamentos pendentes"))+'</span></div>' +
       '<div class="kpi"><span class="label">Custos do mês</span><span class="v">'+brl(tot)+'</span><span class="s">'+custoSub+'</span></div>' +
-      '<div class="kpi res '+(res >= 0 ? "pos" : "neg")+'"><span class="label">Resultado do mês</span><span class="v">'+(res > 0 ? "+ " : "")+brl(res)+'</span><span class="tag">'+(res >= 0 ? "Lucro" : "Déficit")+'</span><span class="s">'+brl(arr)+' arrecadado − '+brl(pg)+' de custos pagos</span></div>' +
+      '<div class="kpi res '+(res >= 0 ? "pos" : "neg")+'"><span class="label">Resultado do mês</span><span class="v">'+(res > 0 ? "+ " : "")+brl(res)+'</span><span class="tag">'+(res >= 0 ? "Lucro" : "Déficit")+'</span><span class="s">'+brl(arr)+' arrecadado − '+brl(pg)+' pagos'+(pgUni > 0 ? ' (inclui '+brl(pgUni)+' do uniforme)' : '')+'</span></div>' +
       '<div class="kpi cash'+(saldo < 0 ? " neg" : "")+'"><span class="label">Saldo do caixa</span><span class="v">'+brl(saldo)+'</span><span class="s">'+esc(saldoSub)+'</span>'+saldoRows+'</div>' + bankCard;
   }
 
@@ -502,25 +518,24 @@
   }
 
   function payControl(p){
-    var u = uniDe(p), parcial = p.pago && u && !u.pago;
-    var label = parcial ? "Falta R$ 15" : (p.pago ? CHECK + "Pago" : "Pendente");
-    var cls = "chip " + (p.pago && !parcial ? "ok" : "pend");
+    var label = p.pago ? CHECK + "Pago" : "Pendente";
+    var cls = "chip " + (p.pago ? "ok" : "pend");
     if (!state.canEdit) return '<span class="'+cls+'">'+label+'</span>';
     return '<button type="button" class="'+cls+'" data-act="pago" data-id="'+esc(p.id)+'" aria-label="'+esc(p.nome)+(p.pago ? ' pago, tocar para marcar pendente' : ' pendente, tocar para marcar pago')+'">'+label+'</button>';
   }
   function valControl(p){
-    var u = uniDe(p);
-    if (u){
-      var extra = '<small style="font-size:12px;color:var(--muted);font-weight:600;margin-left:4px">+ 15 unif.</small>';
-      if (!state.canEdit) return '<span class="val">'+brl(p.valor + u.valor)+'</span>';
-      return '<span class="val">R$<input class="val-input" type="number" min="0" step="1" value="'+p.valor+'" data-act="valor" data-id="'+esc(p.id)+'" aria-label="Mensalidade de '+esc(p.nome)+'">'+extra+'</span>';
-    }
     if (!state.canEdit) return '<span class="val">'+brl(p.valor)+'</span>';
-    return '<span class="val">R$<input class="val-input" type="number" min="0" step="1" value="'+p.valor+'" data-act="valor" data-id="'+esc(p.id)+'" aria-label="Valor de '+esc(p.nome)+'"></span>';
+    return '<span class="val">R$<input class="val-input" type="number" min="0" step="1" value="'+p.valor+'" data-act="valor" data-id="'+esc(p.id)+'" aria-label="Mensalidade de '+esc(p.nome)+'"></span>';
   }
   function delControl(p){
     if (!state.canEdit) return '';
     return '<button type="button" class="del" data-act="del" data-id="'+esc(p.id)+'" aria-label="Remover '+esc(p.nome)+' deste mês">✕</button>';
+  }
+  function fixoRows(list){
+    if (!list.length) return '';
+    return '<ul class="rows" style="padding-top:0">' + list.map(function(f){
+      return '<li class="row" style="grid-template-columns:minmax(0,1fr) auto"><span class="nome">'+esc(f.nome)+(f.obs ? '<small>'+esc(f.obs)+'</small>' : '')+'</span><span class="chip none">Isento</span></li>';
+    }).join("") + '</ul>';
   }
   function memberRows(list){
     if (!list.length) return '<div class="empty"><strong>Ninguém aqui ainda</strong><span>Adicione mensalistas pelo formulário de lançamentos.</span></div>';
@@ -530,7 +545,7 @@
   }
   function resumo(list){
     var pagos = list.filter(function(p){ return p.pago; });
-    var tot = pagos.reduce(function(a,p){ var u = uniDe(p); return a + p.valor + (u && u.pago ? u.valor : 0); }, 0);
+    var tot = pagos.reduce(function(a,p){ return a + p.valor; }, 0);
     return list.length + (list.length === 1 ? " jogador" : " jogadores") + " · " + pagos.length + " de " + list.length + " pagaram · " + brl(tot);
   }
 
@@ -539,21 +554,56 @@
     var mens = pagsDo(m).filter(function(p){ return p.tipo === "mensal"; }).sort(function(a,b){ return a.nome.localeCompare(b.nome, "pt-BR"); });
     var mapa = (state.times[m] && state.times[m].mapa) || {};
     var river = [], boca = [], sem = [];
+    var fixos = (state.times[m] && Array.isArray(state.times[m].fixos)) ? state.times[m].fixos : [];
+    var fR = fixos.filter(function(f){ return f.time === "r"; }), fB = fixos.filter(function(f){ return f.time === "b"; });
     mens.forEach(function(p){ var t = mapa[slug(p.nome)]; if (t === "r") river.push(p); else if (t === "b") boca.push(p); else sem.push(p); });
     var h = "";
     if (river.length || boca.length){
-      h += '<div class="card"><div class="team-head river"><span class="band" aria-hidden="true"></span>'+jerseyR("cR")+'<div><h2 class="anton">River Plate</h2><span class="s">'+resumo(river)+'</span></div></div>'+memberRows(river)+'</div>';
-      h += '<div class="card"><div class="team-head boca"><span class="band" aria-hidden="true"></span>'+jerseyB("cB")+'<div><h2 class="anton">Boca Juniors</h2><span class="s">'+resumo(boca)+'</span></div></div>'+memberRows(boca)+'</div>';
-      if (sem.length) h += '<div class="card"><div class="team-head none"><div><h2 class="anton">Sem time</h2><span class="s muted">'+resumo(sem)+'</span></div></div>'+memberRows(sem)+'</div>';
+      h += '<div class="card"><div class="team-head river"><span class="band" aria-hidden="true"></span>'+jerseyR("cR")+'<div><h2 class="anton">River Plate</h2><span class="s">'+resumo(river)+'</span></div></div>'+memberRows(river)+fixoRows(fR)+'</div>';
+      h += '<div class="card"><div class="team-head boca"><span class="band" aria-hidden="true"></span>'+jerseyB("cB")+'<div><h2 class="anton">Boca Juniors</h2><span class="s">'+resumo(boca)+'</span></div></div>'+memberRows(boca)+fixoRows(fB)+'</div>';
+      if (sem.length) h += '<div class="card" style="grid-column:1 / -1"><div class="team-head none"><div><h2 class="anton">Sem time</h2><span class="s muted">'+resumo(sem)+'</span></div></div>'+memberRows(sem)+'</div>';
     } else {
       h += '<div class="card" style="grid-column:1 / -1"><div class="team-head none"><div><h2 class="anton">Mensalistas</h2><span class="s muted">'+resumo(mens)+(mens.length ? ' · times ainda não escalados' : '')+'</span></div></div>'+memberRows(mens)+'</div>';
     }
-    var uni = uniSoltos(m).sort(function(a,b){ return a.nome.localeCompare(b.nome, "pt-BR"); });
-    if (uni.length){
-      var parc = uni[0].parcela ? " · " + uni[0].parcela + "ª parcela" : "";
-      h += '<div class="card" style="grid-column:1 / -1"><div class="team-head none"><div><h2 class="anton">Parcela do uniforme'+parc+'</h2><span class="s muted">'+resumo(uni)+' · mensalidade deste mês ainda não lançada</span></div></div>'+memberRows(uni)+'</div>';
-    }
     el.teams.innerHTML = h;
+  }
+
+  function renderUniformes(){
+    var box = document.getElementById("uniformes");
+    var uni = state.pagamentos.filter(function(p){ return p.tipo === "uniforme"; });
+    var mesC = null; state.meses.slice().sort().forEach(function(m){ if (custosDo(m).uniforme > 0 && !mesC) mesC = m; });
+    if (!uni.length || !mesC){ box.hidden = true; return; }
+    box.hidden = false;
+    var c = custosDo(mesC), total = c.uniforme || 0;
+    var caixa = (Array.isArray(c.uniformePagos) ? c.uniformePagos : []).reduce(function(a, v){ return a + (+v || 0); }, 0);
+    var recebido = uni.reduce(function(a, p){ return a + (p.pago ? p.valor : 0); }, 0);
+    var previsto = uni.reduce(function(a, p){ return a + p.valor; }, 0);
+    var falta = Math.max(0, total - caixa - recebido);
+    var meses = []; uni.forEach(function(p){ if (meses.indexOf(p.mes) === -1) meses.push(p.mes); }); meses.sort();
+    var por = {}, ordem = [];
+    uni.forEach(function(p){ var k = slug(p.nome); if (!por[k]){ por[k] = {nome:p.nome, m:{}}; ordem.push(k); } por[k].m[p.mes] = (por[k].m[p.mes] || []).concat([p]); });
+    ordem.sort(function(a, b){ return por[a].nome.localeCompare(por[b].nome, "pt-BR"); });
+    var quitados = ordem.filter(function(k){ return meses.every(function(m){ return (por[k].m[m] || []).every(function(p){ return p.pago; }) && (por[k].m[m] || []).length; }) || Object.keys(por[k].m).every(function(m){ return por[k].m[m].every(function(p){ return p.pago; }); }); }).length;
+    var head = '<div class="card-head"><h2 class="anton">Uniformes River x Boca</h2><span class="muted" style="font-size:13px">'+(c.uniformeObs ? esc(c.uniformeObs) : 'compra dos uniformes')+'</span></div>';
+    var resumoU = '<div class="uni-sum">' +
+      '<div><span class="label">Custo total</span><b>'+brl(total)+'</b></div>' +
+      '<div><span class="label">Pago pelo caixa</span><b>'+brl(caixa)+'</b></div>' +
+      '<div><span class="label">Parcelas recebidas</span><b>'+brl(recebido)+'</b><small>de '+brl(previsto)+'</small></div>' +
+      '<div><span class="label">Falta pagar</span><b class="'+(falta > 0 ? 'warn' : 'okc')+'">'+brl(falta)+'</b></div></div>';
+    var th = '<div class="uni-row uni-th"><span>Jogador</span>' + meses.map(function(m){ return '<span>'+monthLabel(m).split("/")[0]+'</span>'; }).join("") + '</div>';
+    var rows = ordem.map(function(k){
+      var r = por[k];
+      return '<div class="uni-row"><span class="nome">'+esc(r.nome)+'</span>' + meses.map(function(m){
+        var ps = r.m[m] || [];
+        if (!ps.length) return '<span class="muted">—</span>';
+        return '<span>' + ps.map(function(p){
+          var lab = (p.pago ? CHECK : '') + monthLabel(m).split("/")[0] + ' · ' + brl(p.valor);
+          return state.canEdit ? '<button type="button" class="game '+(p.pago ? "ok" : "pend")+'" data-act="pago" data-id="'+esc(p.id)+'" aria-label="Uniforme de '+esc(p.nome)+', '+monthLabel(m)+(p.pago ? ', pago' : ', pendente')+'">'+lab+'</button>'
+            : '<span class="game '+(p.pago ? "ok" : "pend")+'">'+lab+'</span>';
+        }).join(" ") + '</span>';
+      }).join("") + '</div>';
+    }).join("");
+    box.innerHTML = head + resumoU + '<div class="uni-table" style="--cols:'+meses.length+'">' + rows + '</div>';
   }
 
   function renderAvulsos(){
@@ -586,7 +636,7 @@
 
   function renderCosts(){
     var m = state.current, c = custosDo(m);
-    var h = custoLinhas(c).map(function(d){
+    var h = custoLinhas(c).filter(function(d){ return d.key !== "uniforme"; }).map(function(d){
       var val = c[d.key] || 0, pg = pagoDe(c, d.key), arr = Array.isArray(c[d.key + "Pagos"]) ? c[d.key + "Pagos"] : [];
       var status = pg >= val && val > 0 ? '<span class="chip ok">'+CHECK+'Pago</span>'
         : (pg > 0 ? '<span class="chip pend">Pago '+brl(pg)+'</span>' : '<span class="chip pend">Pendente</span>');
@@ -609,8 +659,8 @@
       return '<div class="cost"><span class="n">'+d.label+'<small>'+hint+(pg > 0 && falta > 0 ? ' · falta '+brl(falta) : '')+extra+'</small></span>'+v+status+lanc+'</div>';
     }).join("");
     if (c.semBola && state.canEdit) h += '<div style="padding:8px 0"><button type="button" class="btn" data-act="addBola">+ Bola nova</button></div>';
-    h += '<div class="cost-total"><span>Total do mês</span><b>'+brl(custosTotal(m))+'</b></div>';
-    h += '<div class="cost-paid"><span>Já pago</span><b>'+brl(custosPagos(m))+'</b></div>';
+    h += '<div class="cost-total"><span>Total do mês</span><b>'+brl(fixosTotal(m))+'</b></div>';
+    h += '<div class="cost-paid"><span>Já pago</span><b>'+brl(fixosPagos(m))+'</b></div>';
     el.costs.innerHTML = h;
   }
 
@@ -652,7 +702,7 @@
 
   function renderAll(){
     if (!state.current) return;
-    renderMonths(); renderDue(); renderKpis(); renderDebts(); renderAdmin(); renderTeams(); renderAvulsos(); renderCosts(); renderHist();
+    renderMonths(); renderDue(); renderKpis(); renderDebts(); renderAdmin(); renderTeams(); renderUniformes(); renderAvulsos(); renderCosts(); renderHist();
   }
 
   /* ---------- data actions ---------- */
@@ -693,7 +743,7 @@
     var t = e.target.closest("[data-act]");
     if (!t || !state.canEdit) return;
     var act = t.getAttribute("data-act"), m = state.current;
-    if (act === "pago"){ var p = findPag(t.getAttribute("data-id")); var u0 = uniDe(p); if (p && u0 && p.pago && !u0.pago){ u0.pago = true; savePag(u0); renderAll(); return; } if (p){ p.pago = !p.pago; savePag(p); var uu = uniDe(p); if (uu && uu.pago !== p.pago){ uu.pago = p.pago; savePag(uu); } renderAll(); } }
+    if (act === "pago"){ var p = findPag(t.getAttribute("data-id")); if (p){ p.pago = !p.pago; savePag(p); renderAll(); } }
     else if (act === "del"){ var d = findPag(t.getAttribute("data-id")); if (d && state.db) state.db.doc("pagamentos/" + d.id).delete().catch(function(){}); }
     else if (act === "custoPago"){ var k = t.getAttribute("data-key"), patch = {}; patch[k] = !custosDo(m)[k]; saveCustos(m, patch); }
     else if (act === "semBola"){ saveCustos(m, {semBola:true}); }

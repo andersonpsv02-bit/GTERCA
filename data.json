@@ -872,13 +872,6 @@
    "tipo": "uniforme",
    "valor": 15
   },
-  "2026-11__caito": {
-   "mes": "2026-11",
-   "nome": "Caito",
-   "pago": false,
-   "tipo": "mensal",
-   "valor": 55
-  },
   "2026-11__carioca__av0311h": {
    "mes": "2026-11",
    "nome": "Carioca",
@@ -1522,7 +1515,50 @@
    "mes": "2026-09",
    "timeA": [],
    "timeB": []
+  },
+  "2026-11": {
+   "mes": "2026-11",
+   "mapa": {
+    "aranha": "r",
+    "dirceu": "r",
+    "junior": "r",
+    "anderson": "r",
+    "felipe": "r",
+    "nando": "r",
+    "davidson": "r",
+    "gilliard": "r",
+    "diego-miller": "r",
+    "bruno": "r",
+    "aldo": "b",
+    "deda": "b",
+    "fernando": "b",
+    "henrique": "b",
+    "serginho": "b",
+    "patinha": "b",
+    "leandro": "b",
+    "peterson": "b",
+    "marcao": "b",
+    "liminha": "b",
+    "tl": "b"
+   },
+   "fixos": [
+    {
+     "nome": "Severo",
+     "time": "r",
+     "obs": "Goleiro"
+    },
+    {
+     "nome": "Caito",
+     "time": "r",
+     "obs": ""
+    },
+    {
+     "nome": "Alê",
+     "time": "b",
+     "obs": "Goleiro"
+    }
+   ]
   }
  },
- "atualizadoEm": "07/11/2026 13:00"
+ "atualizadoEm": "07/11/2026 13:05"
 }
