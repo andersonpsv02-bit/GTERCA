@@ -830,14 +830,14 @@
   "2026-11__anderson": {
    "mes": "2026-11",
    "nome": "Anderson",
-   "pago": false,
+   "pago": true,
    "tipo": "mensal",
    "valor": 55
   },
   "2026-11__anderson__unif1": {
    "mes": "2026-11",
    "nome": "Anderson",
-   "pago": false,
+   "pago": true,
    "parcela": 1,
    "tipo": "uniforme",
    "valor": 15
@@ -871,6 +871,13 @@
    "parcela": 1,
    "tipo": "uniforme",
    "valor": 15
+  },
+  "2026-11__caito": {
+   "mes": "2026-11",
+   "nome": "Caito",
+   "pago": false,
+   "tipo": "mensal",
+   "valor": 55
   },
   "2026-11__carioca__av0311h": {
    "mes": "2026-11",
@@ -1399,40 +1406,44 @@
  },
  "custosFixos": {
   "2026-07": {
-   "bola": 180,
-   "bolaPago": true,
+   "bola": 0,
+   "bolaPago": false,
    "juiz": 320,
    "juizPago": true,
    "mes": "2026-07",
    "quadra": 750,
-   "quadraPago": true
+   "quadraPago": true,
+   "semBola": true
   },
   "2026-08": {
-   "bola": 100,
-   "bolaPago": true,
+   "bola": 0,
+   "bolaPago": false,
    "juiz": 320,
    "juizPago": true,
    "mes": "2026-08",
    "quadra": 750,
-   "quadraPago": true
+   "quadraPago": true,
+   "semBola": true
   },
   "2026-09": {
-   "bola": 80,
+   "bola": 100,
    "bolaPago": true,
    "juiz": 400,
    "juizPago": true,
    "mes": "2026-09",
    "quadra": 750,
-   "quadraPago": true
+   "quadraPago": true,
+   "semBola": false
   },
   "2026-10": {
-   "bola": 0,
+   "bola": 80,
    "bolaPago": true,
    "juiz": 320,
    "juizPago": true,
    "mes": "2026-10",
    "quadra": 750,
-   "quadraPago": true
+   "quadraPago": true,
+   "semBola": false
   },
   "2026-11": {
    "bola": 200,
@@ -1513,5 +1524,5 @@
    "timeB": []
   }
  },
- "atualizadoEm": "07/11/2026 12:34"
+ "atualizadoEm": "07/11/2026 13:00"
 }

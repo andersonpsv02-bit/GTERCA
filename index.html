@@ -73,6 +73,13 @@
 
   /* ---------- kpis ---------- */
   .kpis{display:grid; grid-template-columns:repeat(auto-fit, minmax(190px, 1fr)); gap:14px;}
+  .kpi .rows2{display:flex; flex-direction:column; gap:3px; margin-top:6px; padding-top:8px; border-top:1px solid rgba(255,255,255,.22); font-size:12.5px;}
+  .kpi .rows2 div{display:flex; justify-content:space-between; gap:8px;}
+  .kpi .rows2 b{font-weight:800;}
+  .kpi.bank{border-color:#B7A6E0;}
+  .kpi.bank .label{color:#5B3FA8;}
+  .kpi.bank .ok{color:var(--ok); font-weight:700;}
+  .kpi.bank .diff{color:var(--bad); font-weight:700;}
   .kpi.res.pos .v{color:var(--ok);}
   .kpi.res.neg .v{color:var(--bad);}
   .kpi.res .tag{align-self:flex-start; font-size:11px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; border-radius:999px; padding:3px 9px;}
@@ -339,7 +346,7 @@
     collection:function(c){ return { onSnapshot:function(cb){ dados.then(function(D){ cb(snapCol(D, c)); }); return function(){}; } }; }
   };
   dados.then(function(D){ var n = document.getElementById("atualizado"); if (n && D.atualizadoEm) n.textContent = "Atualizado em " + D.atualizadoEm; });
-  window.claude = { use:function(n){ return n === "db" ? Promise.resolve(db) : Promise.resolve({ canEdit:function(){ return Promise.resolve(false); } }); } };
+  window.claude = { use:function(n){ if (n === "db") return Promise.resolve(db); if (n === "user") return Promise.resolve({ canEdit:function(){ return Promise.resolve(false); }, isOwner:function(){ return Promise.resolve(false); } }); return Promise.resolve(null); } };
 })();
 </script>
 <script>
@@ -361,7 +368,7 @@
   function isFuture(m){ return m > todayMonth(); }
   function uid(){ return Date.now().toString(36) + Math.random().toString(36).slice(2,6); }
 
-  var state = { db:null, meses:[], current:null, pagamentos:[], custos:{}, times:{}, canEdit:false, escalar:false };
+  var state = { db:null, meses:[], current:null, pagamentos:[], custos:{}, times:{}, canEdit:false, escalar:false, isOwner:false, bank:{status:"off"} };
   var el = {};
   ["months","due","kpis","debts","admin","member-form","m-tipo","m-nome","m-valor","copy-prev-btn","escalar-btn","escalar","teams","avulsos","av-sub","costs","hist","storage-note"].forEach(function(id){ el[id] = document.getElementById(id); });
 
@@ -458,12 +465,28 @@
     var arr = mens + av + uni, res = arr - pg;
     var saldo = saldoAcumulado(), adi = adiantados();
     var saldoSub = "desde julho" + (adi > 0 ? " · inclui " + brl(adi) + " adiantados" : "");
+    var cAtual = custosDo(todayMonth()), aPagar = custoLinhas(cAtual).filter(function(d){ return d.key !== "uniforme"; })
+      .reduce(function(a, d){ return a + Math.max(0, (cAtual[d.key] || 0) - pagoDe(cAtual, d.key)); }, 0);
+    var saldoRows = aPagar > 0 ? '<div class="rows2"><div><span>Contas de '+MESES_LONGO[todayMonth().split("-")[1]]+' a pagar</span><b>'+brl(aPagar)+'</b></div><div><span>Depois de pagar tudo</span><b>'+brl(saldo - aPagar)+'</b></div></div>' : '';
+    var bankCard = "";
+    if (state.isOwner && state.bank.status !== "off"){
+      var b = state.bank, bv, bs;
+      if (b.value != null){
+        var dif = Math.round((b.value - saldo) * 100) / 100;
+        bv = brl(b.value);
+        bs = Math.abs(dif) < 1 ? '<span class="ok">Bate com o painel</span>' : '<span class="diff">Diferença de '+(dif > 0 ? "+ " : "")+brl(dif)+' para o painel</span>';
+        if (b.note) bs += ' · ' + esc(b.note);
+      } else {
+        bv = "—"; bs = esc(b.note || "consultando o PicPay…");
+      }
+      bankCard = '<div class="kpi bank"><span class="label">Conta PicPay (real)</span><span class="v">'+bv+'</span><span class="s">'+bs+'</span></div>';
+    }
     el.kpis.innerHTML =
       '<div class="kpi"><span class="label">Arrecadado</span><span class="v">'+brl(mens+av+uni)+'</span><span class="s">'+brl(mens)+' mensal · '+brl(av)+' avulso'+(uni > 0 ? ' · '+brl(uni)+' uniforme' : '')+'</span></div>' +
       '<div class="kpi warn"><span class="label">A receber</span><span class="v">'+brl(aRec)+'</span><span class="s">'+(nPend === 0 ? "ninguém devendo neste mês" : nPend + (nPend === 1 ? " pagamento pendente" : " pagamentos pendentes"))+'</span></div>' +
       '<div class="kpi"><span class="label">Custos do mês</span><span class="v">'+brl(tot)+'</span><span class="s">'+custoSub+'</span></div>' +
       '<div class="kpi res '+(res >= 0 ? "pos" : "neg")+'"><span class="label">Resultado do mês</span><span class="v">'+(res > 0 ? "+ " : "")+brl(res)+'</span><span class="tag">'+(res >= 0 ? "Lucro" : "Déficit")+'</span><span class="s">'+brl(arr)+' arrecadado − '+brl(pg)+' de custos pagos</span></div>' +
-      '<div class="kpi cash'+(saldo < 0 ? " neg" : "")+'"><span class="label">Saldo do caixa</span><span class="v">'+brl(saldo)+'</span><span class="s">'+esc(saldoSub)+'</span></div>';
+      '<div class="kpi cash'+(saldo < 0 ? " neg" : "")+'"><span class="label">Saldo do caixa</span><span class="v">'+brl(saldo)+'</span><span class="s">'+esc(saldoSub)+'</span>'+saldoRows+'</div>' + bankCard;
   }
 
   function renderDebts(){
@@ -725,12 +748,50 @@
   el["copy-prev-btn"].addEventListener("click", copyPrev);
   el["escalar-btn"].addEventListener("click", function(){ state.escalar = !state.escalar; renderAll(); });
 
+  /* ---------- PicPay (só para o dono) ---------- */
+  var bankStarted = false;
+  function bankValue(p){
+    if (!p || typeof p !== "object") return null;
+    var c = [p.withdrawable && p.withdrawable.available, p.available_balance, p.available, p.balance];
+    for (var i = 0; i < c.length; i++){ var n = typeof c[i] === "string" ? parseFloat(c[i]) : c[i]; if (typeof n === "number" && !isNaN(n)) return n; }
+    return null;
+  }
+  function startBank(){
+    if (bankStarted || !state.isOwner) return;
+    bankStarted = true;
+    window.claude.use("mcp").then(function(mcp){
+      if (!mcp) return;
+      state.bank = {status:"loading", value:null, note:"consultando o PicPay…"}; renderKpis();
+      mcp.watchTool("PicPay", "balance_account_get", null, function(ev){
+        if (ev.type === "data"){
+          var v = bankValue(ev.result && ev.result.payload);
+          var when = ev.result && ev.result.cache ? new Date(ev.result.cache.storedAt) : new Date();
+          state.bank = {status:"ok", value:v, note: v == null ? "não consegui ler o saldo" : "atualizado às " + String(when.getHours()).padStart(2,"0") + ":" + String(when.getMinutes()).padStart(2,"0")};
+        } else {
+          var code = ev.error && ev.error.code, keep = state.bank.value;
+          var msg = {
+            needs_reauth: "Reconecte o PicPay em Configurações › Conectores",
+            server_not_connected: "Adicione o PicPay em Configurações › Conectores",
+            selection_required: "Escolha qual conexão do PicPay usar",
+            not_in_manifest: "Acesso ao PicPay não liberado para esta página",
+            blocked_by_policy: "PicPay bloqueado pela organização",
+            approval_required: "PicPay precisa de aprovação",
+            server_unavailable: "PicPay fora do ar agora, tentando de novo"
+          }[code] || "Não foi possível consultar o PicPay agora";
+          var retract = ["needs_reauth","server_not_connected","not_in_manifest","blocked_by_policy","approval_required","selection_required"].indexOf(code) !== -1;
+          state.bank = {status:"err", value: retract ? null : keep, note: msg};
+        }
+        renderKpis();
+      }, {refetchInterval: 300000});
+    }).catch(function(){});
+  }
+
   /* ---------- boot ---------- */
   function boot(){
     if (!window.claude || !window.claude.use){ el["storage-note"].hidden = false; return; }
     window.claude.use("user").then(function(user){
       if (!user) return;
-      return user.canEdit().then(function(can){ state.canEdit = !!can; renderAll(); });
+      return Promise.all([user.canEdit(), user.isOwner()]).then(function(r){ state.canEdit = !!r[0]; state.isOwner = !!r[1]; renderAll(); startBank(); });
     }).catch(function(){});
     window.claude.use("db").then(function(db){
       if (!db){ el["storage-note"].hidden = false; return; }
