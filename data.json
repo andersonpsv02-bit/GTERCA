@@ -1475,10 +1475,11 @@
    "quadraPago": true,
    "semBola": false,
    "uniforme": 960,
-   "uniformeObs": "R$ 200 pagos pelo caixa · restante pago conforme as parcelas de R$ 15 (nov e dez)",
+   "uniformeObs": "R$ 200 do caixa + R$ 135 das primeiras parcelas já repassados · restante conforme as parcelas de R$ 15 (nov e dez)",
    "uniformePago": false,
    "uniformePagos": [
-    200
+    200,
+    135
    ]
   },
   "2026-12": {
@@ -1596,5 +1597,5 @@
    "mes": "2026-11"
   }
  },
- "atualizadoEm": "10/11/2026 20:12"
+ "atualizadoEm": "10/11/2026 20:15"
 }
