@@ -1081,17 +1081,25 @@
    "valor": 15
   },
   "2026-11__liminha": {
+   "forma": "pix",
    "mes": "2026-11",
    "nome": "Liminha",
-   "pago": false,
+   "pago": true,
+   "pixData": "10 nov",
+   "pixDe": "David Gonçalves Lima",
+   "pixRef": "px1t13vf03m",
    "tipo": "mensal",
    "valor": 55
   },
   "2026-11__liminha__unif1": {
+   "forma": "pix",
    "mes": "2026-11",
    "nome": "Liminha",
-   "pago": false,
+   "pago": true,
    "parcela": 1,
+   "pixData": "10 nov",
+   "pixDe": "David Gonçalves Lima",
+   "pixRef": "px1coy8k43m",
    "tipo": "uniforme",
    "valor": 15
   },
@@ -1588,5 +1596,5 @@
    "mes": "2026-11"
   }
  },
- "atualizadoEm": "10/11/2026 20:03"
+ "atualizadoEm": "10/11/2026 20:12"
 }

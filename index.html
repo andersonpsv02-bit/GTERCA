@@ -224,6 +224,36 @@
   .note{text-align:center; font-size:13px; color:var(--muted); margin:0;}
   .storage-note{text-align:center; font-size:13px; color:var(--warn-ink); background:var(--warn-bg); border:1px solid var(--warn-line); border-radius:10px; padding:10px 12px;}
 
+  /* ---------- conferência PicPay ---------- */
+  .row .nome small.pix{color:#5B3FA8; font-weight:600;}
+  .row .nome small.cash{color:var(--ok); font-weight:600;}
+  .chip.busy{background:#EDE7FA; color:#5B3FA8;}
+  .ov{position:fixed; inset:0; z-index:50; background:rgba(20,22,26,.55); display:flex; align-items:flex-end; justify-content:center;
+    padding:16px max(16px, env(safe-area-inset-right, 0px)) calc(16px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));}
+  @media (min-width:640px){ .ov{align-items:center;} }
+  .sheet{width:100%; max-width:480px; max-height:min(86vh, 640px); overflow:auto; background:var(--surface); border-radius:18px; padding:20px; display:flex; flex-direction:column; gap:14px; box-shadow:0 18px 40px rgba(0,0,0,.25);}
+  .sheet h3{margin:0; font-size:22px;}
+  .sheet .lead{margin:0; font-size:15px; color:var(--ink-2); line-height:1.45;}
+  .sheet .who{display:flex; align-items:center; gap:10px; background:var(--surface-2); border-radius:12px; padding:10px 12px; font-size:14px;}
+  .sheet .who b{font-size:16px;}
+  .sheet .spin{width:18px; height:18px; border-radius:50%; border:3px solid #D9D0F2; border-top-color:#5B3FA8; animation:spin .8s linear infinite; flex:0 0 auto;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  @media (prefers-reduced-motion:reduce){ .sheet .spin{animation:none;} }
+  .txs{display:flex; flex-direction:column; gap:6px;}
+  .txs .grp{font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin-top:4px;}
+  .tx{display:grid; grid-template-columns:auto minmax(0,1fr) auto; gap:10px; align-items:center; padding:10px 12px; border:1px solid var(--line); border-radius:12px; cursor:pointer;}
+  .tx:has(input:checked){border-color:#5B3FA8; background:#F4F0FC;}
+  .tx input{width:18px; height:18px; accent-color:#5B3FA8; margin:0;}
+  .tx .n{font-weight:600; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .tx .n small{display:block; font-weight:400; font-size:12.5px; color:var(--muted);}
+  .tx .a{font-weight:800;}
+  .remember{display:flex; gap:8px; align-items:flex-start; font-size:13.5px; color:var(--ink-2);}
+  .remember input{width:18px; height:18px; margin:1px 0 0; accent-color:#5B3FA8;}
+  .acts{display:flex; flex-wrap:wrap; gap:8px;}
+  .acts .btn{flex:1 1 140px;}
+  .btn.pix{background:#5B3FA8; border-color:#5B3FA8; color:#fff;}
+  .toast{position:fixed; left:50%; transform:translateX(-50%); bottom:calc(16px + env(safe-area-inset-bottom, 0px)); z-index:60; max-width:calc(100% - 32px); background:var(--ink); color:#fff; border-radius:12px; padding:12px 16px; font-size:14px; font-weight:600; box-shadow:0 10px 24px rgba(0,0,0,.25);}
+
   @media (max-width:640px){
     .top-in, main{padding-left:16px; padding-right:16px;}
     .brand h1{font-size:34px;}
@@ -347,6 +377,11 @@
   <p class="note"><span id="atualizado">Atualizado por Anderson</span> · somente leitura</p>
 </main>
 
+<div class="ov" id="pix-ov" hidden role="dialog" aria-modal="true" aria-labelledby="pix-title">
+  <div class="sheet" id="pix-sheet"></div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
 <script>
 /* Versão pública: lê data.json, sem edição. */
 (function(){
@@ -382,7 +417,7 @@
   function isFuture(m){ return m > todayMonth(); }
   function uid(){ return Date.now().toString(36) + Math.random().toString(36).slice(2,6); }
 
-  var state = { db:null, meses:[], current:null, pagamentos:[], custos:{}, times:{}, canEdit:false, escalar:false, isOwner:false, bank:{status:"off"} };
+  var state = { db:null, meses:[], current:null, pagamentos:[], custos:{}, times:{}, canEdit:false, escalar:false, isOwner:false, bank:{status:"off"}, checking:null, apelidos:{} };
   var el = {};
   ["months","due","kpis","debts","admin","member-form","m-tipo","m-nome","m-valor","copy-prev-btn","escalar-btn","escalar","teams","avulsos","av-sub","costs","hist","storage-note"].forEach(function(id){ el[id] = document.getElementById(id); });
 
@@ -399,8 +434,7 @@
   function pagoDe(c, key){
     if (key === "uniforme"){
       var base = (Array.isArray(c.uniformePagos) ? c.uniformePagos : []).reduce(function(a, v){ return a + (+v || 0); }, 0);
-      var parc = state.pagamentos.reduce(function(a, p){ return a + ((p.tipo === "uniforme" && p.pago) ? p.valor : 0); }, 0);
-      return Math.min(c.uniforme || 0, base + parc);
+      return Math.min(c.uniforme || 0, base);
     }
     var arr = c[key + "Pagos"];
     if (Array.isArray(arr) && arr.length) return arr.reduce(function(a, v){ return a + (+v || 0); }, 0);
@@ -518,8 +552,9 @@
   }
 
   function payControl(p){
-    var label = p.pago ? CHECK + "Pago" : "Pendente";
-    var cls = "chip " + (p.pago ? "ok" : "pend");
+    var busy = state.checking === p.id;
+    var label = busy ? "Conferindo…" : (p.pago ? CHECK + "Pago" : "Pendente");
+    var cls = "chip " + (busy ? "busy" : (p.pago ? "ok" : "pend"));
     if (!state.canEdit) return '<span class="'+cls+'">'+label+'</span>';
     return '<button type="button" class="'+cls+'" data-act="pago" data-id="'+esc(p.id)+'" aria-label="'+esc(p.nome)+(p.pago ? ' pago, tocar para marcar pendente' : ' pendente, tocar para marcar pago')+'">'+label+'</button>';
   }
@@ -537,10 +572,15 @@
       return '<li class="row" style="grid-template-columns:minmax(0,1fr) auto"><span class="nome">'+esc(f.nome)+(f.obs ? '<small>'+esc(f.obs)+'</small>' : '')+'</span><span class="chip none">Isento</span></li>';
     }).join("") + '</ul>';
   }
+  function formaTag(p){
+    if (!state.canEdit || !p.pago || !p.forma) return '';
+    if (p.forma === "dinheiro") return '<small class="cash">Dinheiro</small>';
+    return '<small class="pix">Pix'+(p.pixDe ? ' de ' + esc(p.pixDe.split(" ")[0]) : '')+(p.pixData ? ' · ' + esc(p.pixData) : '')+'</small>';
+  }
   function memberRows(list){
     if (!list.length) return '<div class="empty"><strong>Ninguém aqui ainda</strong><span>Adicione mensalistas pelo formulário de lançamentos.</span></div>';
     return '<ul class="rows">' + list.map(function(p){
-      return '<li class="row"><span class="nome">'+esc(p.nome)+'</span>'+valControl(p)+payControl(p)+delControl(p)+'</li>';
+      return '<li class="row"><span class="nome">'+esc(p.nome)+formaTag(p)+'</span>'+valControl(p)+payControl(p)+delControl(p)+'</li>';
     }).join("") + '</ul>';
   }
   function resumo(list){
@@ -578,7 +618,8 @@
     var caixa = (Array.isArray(c.uniformePagos) ? c.uniformePagos : []).reduce(function(a, v){ return a + (+v || 0); }, 0);
     var recebido = uni.reduce(function(a, p){ return a + (p.pago ? p.valor : 0); }, 0);
     var previsto = uni.reduce(function(a, p){ return a + p.valor; }, 0);
-    var falta = Math.max(0, total - caixa - recebido);
+    var falta = Math.max(0, total - caixa);
+    var pagosU = Array.isArray(c.uniformePagos) ? c.uniformePagos : [];
     var meses = []; uni.forEach(function(p){ if (meses.indexOf(p.mes) === -1) meses.push(p.mes); }); meses.sort();
     var por = {}, ordem = [];
     uni.forEach(function(p){ var k = slug(p.nome); if (!por[k]){ por[k] = {nome:p.nome, m:{}}; ordem.push(k); } por[k].m[p.mes] = (por[k].m[p.mes] || []).concat([p]); });
@@ -587,9 +628,17 @@
     var head = '<div class="card-head"><h2 class="anton">Uniformes River x Boca</h2><span class="muted" style="font-size:13px">'+(c.uniformeObs ? esc(c.uniformeObs) : 'compra dos uniformes')+'</span></div>';
     var resumoU = '<div class="uni-sum">' +
       '<div><span class="label">Custo total</span><b>'+brl(total)+'</b></div>' +
-      '<div><span class="label">Pago pelo caixa</span><b>'+brl(caixa)+'</b></div>' +
-      '<div><span class="label">Parcelas recebidas</span><b>'+brl(recebido)+'</b><small>de '+brl(previsto)+'</small></div>' +
-      '<div><span class="label">Falta pagar</span><b class="'+(falta > 0 ? 'warn' : 'okc')+'">'+brl(falta)+'</b></div></div>';
+      '<div><span class="label">Já pago ao fornecedor</span><b>'+brl(caixa)+'</b></div>' +
+      '<div><span class="label">Parcelas recebidas</span><b>'+brl(recebido)+'</b><small>de '+brl(previsto)+' · ficam no caixa até o pagamento</small></div>' +
+      '<div><span class="label">Falta pagar ao fornecedor</span><b class="'+(falta > 0 ? 'warn' : 'okc')+'">'+brl(falta)+'</b></div></div>';
+    var lancU = '';
+    if (pagosU.length || state.canEdit){
+      lancU = '<div class="lanc" style="margin:-4px 0 14px"><span class="muted" style="font-size:13px">Pagamentos ao fornecedor:</span> ' + pagosU.map(function(x, i){
+        return '<span class="lanc-item">'+brl(+x || 0)+(state.canEdit ? '<button type="button" class="del" data-act="rmuni" data-m="'+mesC+'" data-i="'+i+'" aria-label="Remover pagamento de '+brl(+x || 0)+' do uniforme">✕</button>' : '')+'</span>';
+      }).join("");
+      if (state.canEdit) lancU += '<span class="lanc-add"><input type="number" min="0" step="1" placeholder="valor" data-lanc-uni="1" aria-label="Valor pago ao fornecedor dos uniformes"><button type="button" class="btn" data-act="lancarUni" data-m="'+mesC+'">Lançar pagamento</button></span>';
+      lancU += '</div>';
+    }
     var th = '<div class="uni-row uni-th"><span>Jogador</span>' + meses.map(function(m){ return '<span>'+monthLabel(m).split("/")[0]+'</span>'; }).join("") + '</div>';
     var rows = ordem.map(function(k){
       var r = por[k];
@@ -603,7 +652,7 @@
         }).join(" ") + '</span>';
       }).join("") + '</div>';
     }).join("");
-    box.innerHTML = head + resumoU + '<div class="uni-table" style="--cols:'+meses.length+'">' + rows + '</div>';
+    box.innerHTML = head + resumoU + lancU + '<div class="uni-table" style="--cols:'+meses.length+'">' + rows + '</div>';
   }
 
   function renderAvulsos(){
@@ -707,7 +756,13 @@
 
   /* ---------- data actions ---------- */
   function findPag(id){ for (var i = 0; i < state.pagamentos.length; i++) if (state.pagamentos[i].id === id) return state.pagamentos[i]; return null; }
-  function savePag(p){ if (!state.db) return; var doc = {mes:p.mes, nome:p.nome, tipo:p.tipo, valor:p.valor, pago:p.pago}; if (p.parcela) doc.parcela = p.parcela; state.db.doc("pagamentos/" + p.id).set(doc).catch(function(){}); }
+  function savePag(p){
+    if (!state.db) return;
+    var doc = {mes:p.mes, nome:p.nome, tipo:p.tipo, valor:p.valor, pago:p.pago};
+    if (p.parcela) doc.parcela = p.parcela;
+    if (p.pago && p.forma){ doc.forma = p.forma; if (p.pixRef) doc.pixRef = p.pixRef; if (p.pixDe) doc.pixDe = p.pixDe; if (p.pixData) doc.pixData = p.pixData; }
+    state.db.doc("pagamentos/" + p.id).set(doc).catch(function(){});
+  }
   function addPag(mes, nome, tipo, valor){
     var id = tipo !== "mensal" ? (mes + "__" + slug(nome) + "__" + uid()) : (mes + "__" + slug(nome));
     savePag({id:id, mes:mes, nome:nome, tipo:tipo, valor:valor, pago:false});
@@ -743,7 +798,12 @@
     var t = e.target.closest("[data-act]");
     if (!t || !state.canEdit) return;
     var act = t.getAttribute("data-act"), m = state.current;
-    if (act === "pago"){ var p = findPag(t.getAttribute("data-id")); if (p){ p.pago = !p.pago; savePag(p); renderAll(); } }
+    if (act === "pago"){
+      var p = findPag(t.getAttribute("data-id"));
+      if (!p || state.checking) return;
+      if (p.pago){ p.pago = false; p.forma = p.pixRef = p.pixDe = p.pixData = null; savePag(p); renderAll(); }
+      else conferirPix(p);
+    }
     else if (act === "del"){ var d = findPag(t.getAttribute("data-id")); if (d && state.db) state.db.doc("pagamentos/" + d.id).delete().catch(function(){}); }
     else if (act === "custoPago"){ var k = t.getAttribute("data-key"), patch = {}; patch[k] = !custosDo(m)[k]; saveCustos(m, patch); }
     else if (act === "semBola"){ saveCustos(m, {semBola:true}); }
@@ -758,6 +818,12 @@
       var key2 = t.getAttribute("data-key"), i2 = +t.getAttribute("data-i"), cc2 = custosDo(m);
       var arr2 = (cc2[key2 + "Pagos"] || []).slice(); arr2.splice(i2, 1);
       var pt2 = {}; pt2[key2 + "Pagos"] = arr2; pt2[key2 + "Pago"] = arr2.length ? arr2.reduce(function(a,v){ return a + v; }, 0) >= (cc2[key2] || 0) : false; saveCustos(m, pt2);
+    }
+    else if (act === "lancarUni" || act === "rmuni"){
+      var mu = t.getAttribute("data-m"), cu = custosDo(mu), au = (Array.isArray(cu.uniformePagos) ? cu.uniformePagos : []).slice();
+      if (act === "lancarUni"){ var iu = document.querySelector('input[data-lanc-uni]'), vu = parseFloat(iu && iu.value); if (isNaN(vu) || vu <= 0){ if (iu) iu.focus(); return; } au.push(vu); }
+      else au.splice(+t.getAttribute("data-i"), 1);
+      saveCustos(mu, {uniformePagos:au, uniformePago:au.reduce(function(a, v){ return a + v; }, 0) >= (cu.uniforme || 0)});
     }
     else if (act === "addBola"){ saveCustos(m, {semBola:false}); }
     else if (act === "time"){
@@ -836,6 +902,169 @@
     }).catch(function(){});
   }
 
+  /* ---------- conferir Pix ao marcar "Pago" ---------- */
+  var ov = document.getElementById("pix-ov"), sheet = document.getElementById("pix-sheet"), toastEl = document.getElementById("toast"), toastT = null;
+  function toast(msg){ toastEl.textContent = msg; toastEl.hidden = false; clearTimeout(toastT); toastT = setTimeout(function(){ toastEl.hidden = true; }, 4500); }
+  function norm(s){ return " " + String(s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, " ").trim() + " "; }
+  function ymd(d){ return d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0"); }
+  function hashRef(s){ var h = 5381; s = String(s); for (var i = 0; i < s.length; i++) h = ((h << 5) + h + s.charCodeAt(i)) >>> 0; return "px" + h.toString(36) + s.length.toString(36); }
+  function brlTxt(s){ var n = parseFloat(String(s || "").replace(/[^0-9,\-]/g, "").replace(",", ".")); return isNaN(n) ? null : n; }
+  function curtaData(s){ var m = String(s || "").match(/^(\d{1,2}) (\w{3})/); return m ? m[1].padStart(2,"0") + " " + m[2].toLowerCase() : String(s || ""); }
+  function fechar(){ ov.hidden = true; sheet.innerHTML = ""; state.checking = null; renderAll(); }
+  ov.addEventListener("click", function(e){ if (e.target === ov) fechar(); });
+  document.addEventListener("keydown", function(e){ if (e.key === "Escape" && !ov.hidden) fechar(); });
+
+  // nomes no painel → partes do nome; alias: trecho do nome do pagador → slug do jogador
+  function aliasDe(tx){
+    var n = norm(tx.nome), best = null;
+    Object.keys(state.apelidos || {}).forEach(function(k){ var nk = norm(k); if (nk.trim() && n.indexOf(nk) !== -1 && (!best || nk.length > best.len)) best = {len:nk.length, alvo:state.apelidos[k]}; });
+    return best ? best.alvo : null;
+  }
+  function nomeBate(tx, p){
+    var al = aliasDe(tx);
+    if (al) return al === slug(p.nome);
+    var partes = norm(p.nome.replace(/\(.*?\)/g, " ")).trim().split(" ").filter(function(w){ return w.length >= 3; });
+    if (!partes.length) return false;
+    var n = norm(tx.nome);
+    return partes.every(function(w){ return n.indexOf(" " + w + " ") !== -1; });
+  }
+  function grupoDe(p){
+    var k = slug(p.nome);
+    var outros = pagsDo(p.mes).filter(function(x){ return !x.pago && x.id !== p.id && slug(x.nome) === k; });
+    return [p].concat(outros);
+  }
+  function soma(lista){ return lista.reduce(function(a, x){ return a + x.valor; }, 0); }
+  function linhasPara(tx, p){
+    var g = grupoDe(p), v = tx.valor;
+    if (Math.abs(v - p.valor) < 0.01 || (p.tipo === "mensal" && Math.abs(v - p.valor * 1.2) < 0.01)) return [p];
+    if (g.length > 1 && Math.abs(v - soma(g)) < 0.01) return g;
+    return null;
+  }
+  function marcar(lista, forma, tx){
+    lista.forEach(function(x){
+      x.pago = true; x.forma = forma;
+      x.pixRef = tx ? tx.ref : null; x.pixDe = tx ? tx.nome : null; x.pixData = tx ? curtaData(tx.quando) : null;
+      savePag(x);
+    });
+    state.checking = null; ov.hidden = true; sheet.innerHTML = ""; renderAll();
+  }
+  function lembrar(tx, p){
+    if (!state.db) return;
+    var mapa = Object.assign({}, state.apelidos || {}); mapa[norm(tx.nome).trim()] = slug(p.nome); state.apelidos = mapa;
+    state.db.doc("config/apelidos").set({mapa: mapa}).catch(function(){});
+  }
+
+  function abrir(html){ sheet.innerHTML = html; ov.hidden = false; var f = sheet.querySelector("[data-focus]") || sheet.querySelector("button"); if (f) f.focus(); }
+  function whoHtml(p){ return '<div class="who"><span><b>'+esc(p.nome)+'</b><br><span class="muted">'+esc(p.tipo === "mensal" ? "Mensalidade" : (p.tipo === "avulso" ? "Avulso" : "Uniforme"))+' de '+esc(MESES_LONGO[p.mes.split("-")[1]])+' · '+brl(p.valor)+'</span></span></div>'; }
+
+  function perguntarSemConsulta(p, motivo){
+    abrir('<h3 class="anton" id="pix-title">Como foi o pagamento?</h3>' + whoHtml(p) +
+      '<p class="lead">'+esc(motivo)+'</p>' +
+      '<div class="acts"><button type="button" class="btn primary" data-pv="dinheiro" data-focus>Foi em dinheiro</button><button type="button" class="btn pix" data-pv="pix">Foi Pix, marcar mesmo assim</button><button type="button" class="btn link" data-pv="cancelar">Cancelar</button></div>');
+    sheet.onclick = function(e){
+      var b = e.target.closest("[data-pv]"); if (!b) return;
+      var v = b.getAttribute("data-pv");
+      if (v === "dinheiro") marcar([p], "dinheiro", null);
+      else if (v === "pix") marcar([p], "pix", null);
+      else fechar();
+    };
+  }
+
+  function escolher(p, txs){
+    var usados = {}; state.pagamentos.forEach(function(x){ if (x.pixRef) usados[x.pixRef] = true; });
+    var livres = txs.filter(function(t){ return !usados[t.ref]; });
+    var porNome = livres.filter(function(t){ return nomeBate(t, p); });
+    var porValor = livres.filter(function(t){ return porNome.indexOf(t) === -1 && linhasPara(t, p); });
+    var outros = livres.filter(function(t){ return porNome.indexOf(t) === -1 && porValor.indexOf(t) === -1; }).slice(0, 8);
+    var lista = porNome.concat(porValor, outros);
+    function item(t, i){
+      var cobre = linhasPara(t, p), extra = cobre && cobre.length > 1 ? ' · cobre '+cobre.length+' lançamentos' : '';
+      return '<label class="tx"><input type="radio" name="pixsel" value="'+i+'"><span class="n">'+esc(t.nome)+'<small>'+esc(curtaData(t.quando))+extra+'</small></span><span class="a">'+brl(t.valor)+'</span></label>';
+    }
+    var h = '<h3 class="anton" id="pix-title">Pix não encontrado</h3>' + whoHtml(p) +
+      '<p class="lead">Não achei no PicPay um Pix de '+esc(p.nome)+' no valor de '+brl(p.valor)+'. Foi em dinheiro? Se o Pix veio de outra pessoa, escolha abaixo.</p>';
+    if (lista.length){
+      var idx = 0;
+      h += '<div class="txs">';
+      if (porNome.length){ h += '<span class="grp">Mesmo nome, valor diferente</span>' + porNome.map(function(t){ return item(t, idx++); }).join(""); }
+      if (porValor.length){ h += '<span class="grp">Mesmo valor, outro nome</span>' + porValor.map(function(t){ return item(t, idx++); }).join(""); }
+      if (outros.length){ h += '<span class="grp">Outros Pix recebidos</span>' + outros.map(function(t){ return item(t, idx++); }).join(""); }
+      h += '</div><label class="remember" id="pix-rem" hidden><input type="checkbox" id="pix-rem-cb" checked><span id="pix-rem-txt"></span></label>';
+    } else {
+      h += '<p class="lead muted">Nenhum Pix recebido ainda sem dono nesse período.</p>';
+    }
+    h += '<div class="acts"><button type="button" class="btn primary" data-pv="dinheiro" data-focus>Foi em dinheiro</button>' +
+      (lista.length ? '<button type="button" class="btn pix" data-pv="usar" disabled>Usar este Pix</button>' : '') +
+      '<button type="button" class="btn link" data-pv="cancelar">Cancelar</button></div>';
+    abrir(h);
+    var sel = null;
+    sheet.onchange = function(e){
+      if (e.target.name !== "pixsel") return;
+      sel = lista[+e.target.value];
+      var usar = sheet.querySelector('[data-pv="usar"]'); if (usar) usar.disabled = false;
+      var rem = document.getElementById("pix-rem");
+      if (rem){ var outro = !nomeBate(sel, p); rem.hidden = !outro; document.getElementById("pix-rem-txt").textContent = "Lembrar que Pix de " + sel.nome + " é de " + p.nome; }
+    };
+    sheet.onclick = function(e){
+      var b = e.target.closest("[data-pv]"); if (!b || b.disabled) return;
+      var v = b.getAttribute("data-pv");
+      if (v === "dinheiro") marcar([p], "dinheiro", null);
+      else if (v === "cancelar") fechar();
+      else if (v === "usar" && sel){
+        var cb = document.getElementById("pix-rem-cb"), rem = document.getElementById("pix-rem");
+        if (rem && !rem.hidden && cb && cb.checked) lembrar(sel, p);
+        marcar(linhasPara(sel, p) || [p], "pix", sel);
+        toast("Pago com Pix de " + sel.nome.split(" ")[0] + " · " + brl(sel.valor));
+      }
+    };
+  }
+
+  var ERRO_PIX = {
+    needs_reauth: "A conexão com o PicPay expirou. Reconecte em Configurações › Conectores.",
+    server_not_connected: "O PicPay não está conectado nesta conta. Adicione em Configurações › Conectores.",
+    selection_required: "Escolha qual conexão do PicPay usar no aviso do Claude e tente de novo.",
+    not_in_manifest: "Esta página ainda não tem permissão para ler o extrato do PicPay. Libere no aviso de permissão e tente de novo.",
+    approval_required: "A consulta ao extrato precisa da sua aprovação. Toque em Pago de novo e permita.",
+    blocked_by_policy: "A consulta ao PicPay está bloqueada para esta conta.",
+    server_unavailable: "O PicPay não respondeu agora. Tente de novo em instantes."
+  };
+
+  function conferirPix(p){
+    state.checking = p.id; renderAll();
+    if (!state.isOwner){ perguntarSemConsulta(p, "A conferência no PicPay só funciona na conta do Anderson."); return; }
+    abrir('<h3 class="anton" id="pix-title">Conferindo no PicPay</h3>' + whoHtml(p) + '<div class="who"><span class="spin" aria-hidden="true"></span><span>Procurando o Pix no extrato…</span></div><div class="acts"><button type="button" class="btn link" data-pv="cancelar">Cancelar</button></div>');
+    var cancelado = false;
+    sheet.onclick = function(e){ var b = e.target.closest("[data-pv]"); if (b){ cancelado = true; fechar(); } };
+    var hoje = new Date(), pm = p.mes.split("-");
+    var ini = new Date(+pm[0], +pm[1] - 2, 1), lim = new Date(hoje.getTime() - 89 * 86400000);
+    if (ini < lim) ini = lim;
+    window.claude.use("mcp").then(function(mcp){
+      if (cancelado) return;
+      if (!mcp){ perguntarSemConsulta(p, "Não consegui acessar o PicPay por aqui."); return; }
+      return mcp.callTool("PicPay", "statements_list", {data_inicio: ymd(ini), data_fim: ymd(hoje), limite: 100}, {cache: false}).then(function(res){
+        if (cancelado) return;
+        var pl = res && res.payload, dias = (pl && Array.isArray(pl.dias)) ? pl.dias : [];
+        var txs = [];
+        dias.forEach(function(d){ (Array.isArray(d.movimentacoes) ? d.movimentacoes : []).forEach(function(m){
+          if (m.fluxo !== "INFLOW") return;
+          var v = brlTxt(m.total_amount); if (v == null) return;
+          txs.push({ref: hashRef(m.transaction_id || (m.data_hora + m.contraparte + m.total_amount)), nome: m.contraparte || m.descricao || "Pix", valor: v, quando: m.data_hora || ""});
+        }); });
+        var usados = {}; state.pagamentos.forEach(function(x){ if (x.pixRef) usados[x.pixRef] = true; });
+        var achado = null, linhas = null;
+        txs.some(function(t){ if (usados[t.ref] || !nomeBate(t, p)) return false; var l = linhasPara(t, p); if (l){ achado = t; linhas = l; return true; } return false; });
+        if (achado){
+          marcar(linhas, "pix", achado);
+          toast("Pix encontrado · " + achado.nome.split(" ")[0] + ", " + brl(achado.valor) + " em " + curtaData(achado.quando) + (linhas.length > 1 ? " · " + linhas.length + " lançamentos" : ""));
+        } else escolher(p, txs);
+      });
+    }).catch(function(err){
+      if (cancelado) return;
+      var code = err && err.code;
+      perguntarSemConsulta(p, ERRO_PIX[code] || "Não foi possível consultar o PicPay agora.");
+    });
+  }
+
   /* ---------- boot ---------- */
   function boot(){
     if (!window.claude || !window.claude.use){ el["storage-note"].hidden = false; return; }
@@ -855,12 +1084,16 @@
       db.collection("pagamentos").onSnapshot(function(snap){
         state.pagamentos = snap.docs.map(function(d){
           var x = d.data() || {};
-          return { id:d.id, mes:x.mes, nome:x.nome || "?", tipo:x.tipo === "avulso" ? "avulso" : (x.tipo === "uniforme" ? "uniforme" : "mensal"), parcela:x.parcela || null, valor:typeof x.valor === "number" ? x.valor : 0, pago:!!x.pago };
+          return { id:d.id, mes:x.mes, nome:x.nome || "?", tipo:x.tipo === "avulso" ? "avulso" : (x.tipo === "uniforme" ? "uniforme" : "mensal"), parcela:x.parcela || null, valor:typeof x.valor === "number" ? x.valor : 0, pago:!!x.pago,
+            forma: x.forma === "pix" || x.forma === "dinheiro" ? x.forma : null, pixRef: typeof x.pixRef === "string" ? x.pixRef : null, pixDe: typeof x.pixDe === "string" ? x.pixDe : null, pixData: typeof x.pixData === "string" ? x.pixData : null };
         });
         renderAll();
       }, function(){});
       db.collection("custosFixos").onSnapshot(function(snap){
         var map = {}; snap.docs.forEach(function(d){ map[d.id] = d.data() || {}; }); state.custos = map; renderAll();
+      }, function(){});
+      db.doc("config/apelidos").onSnapshot(function(snap){
+        var d = snap.data(); state.apelidos = (d && d.mapa && typeof d.mapa === "object") ? d.mapa : {};
       }, function(){});
       db.collection("times").onSnapshot(function(snap){
         var map = {}; snap.docs.forEach(function(d){ map[d.id] = d.data() || {}; }); state.times = map; renderAll();
@@ -873,6 +1106,7 @@
   boot();
 })();
 </script>
+
 
 
 </body>
