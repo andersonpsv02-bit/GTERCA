@@ -843,17 +843,25 @@
    "valor": 15
   },
   "2026-11__aranha": {
+   "forma": "pix",
    "mes": "2026-11",
    "nome": "Aranha",
-   "pago": false,
+   "pago": true,
+   "pixData": "09 nov",
+   "pixDe": "LUCIANO CARDOSO BARBOSA",
+   "pixRef": "pxaww2x03m",
    "tipo": "mensal",
    "valor": 55
   },
   "2026-11__aranha__unif1": {
+   "forma": "pix",
    "mes": "2026-11",
    "nome": "Aranha",
-   "pago": false,
+   "pago": true,
    "parcela": 1,
+   "pixData": "09 nov",
+   "pixDe": "LUCIANO CARDOSO BARBOSA",
+   "pixRef": "px10hu4v53m",
    "tipo": "uniforme",
    "valor": 15
   },
@@ -979,14 +987,14 @@
   "2026-11__fernando": {
    "mes": "2026-11",
    "nome": "Fernando",
-   "pago": false,
+   "pago": true,
    "tipo": "mensal",
    "valor": 55
   },
   "2026-11__fernando__unif1": {
    "mes": "2026-11",
    "nome": "Fernando",
-   "pago": false,
+   "pago": true,
    "parcela": 1,
    "tipo": "uniforme",
    "valor": 15
@@ -1088,17 +1096,25 @@
    "valor": 15
   },
   "2026-11__marcao": {
+   "forma": "pix",
    "mes": "2026-11",
    "nome": "Marcão",
-   "pago": false,
+   "pago": true,
+   "pixData": "09 nov",
+   "pixDe": "MARCOS LIMA DA SILVA",
+   "pixRef": "px1uav6vh3m",
    "tipo": "mensal",
    "valor": 55
   },
   "2026-11__marcao__unif1": {
+   "forma": "pix",
    "mes": "2026-11",
    "nome": "Marcão",
-   "pago": false,
+   "pago": true,
    "parcela": 1,
+   "pixData": "09 nov",
+   "pixDe": "MARCOS LIMA DA SILVA",
+   "pixRef": "px17n3w173m",
    "tipo": "uniforme",
    "valor": 15
   },
@@ -1172,14 +1188,14 @@
   "2026-11__tl": {
    "mes": "2026-11",
    "nome": "TL",
-   "pago": false,
+   "pago": true,
    "tipo": "mensal",
    "valor": 55
   },
   "2026-11__tl__unif1": {
    "mes": "2026-11",
    "nome": "TL",
-   "pago": false,
+   "pago": true,
    "parcela": 1,
    "tipo": "uniforme",
    "valor": 15
@@ -1448,7 +1464,7 @@
    ],
    "mes": "2026-11",
    "quadra": 750,
-   "quadraPago": false,
+   "quadraPago": true,
    "semBola": false,
    "uniforme": 960,
    "uniformeObs": "R$ 200 pagos pelo caixa · restante pago conforme as parcelas de R$ 15 (nov e dez)",
@@ -1469,6 +1485,17 @@
   }
  },
  "config": {
+  "apelidos": {
+   "mapa": {
+    "danilo": "duff",
+    "diego vitorio": "suarez",
+    "henrique domingos": "nicanor",
+    "luciano cardoso barbosa": "aranha",
+    "marcos lima da silva": "marcao",
+    "vanderlei": "wanderley-neto",
+    "wanderley": "wanderley-neto"
+   }
+  },
   "meses": {
    "lista": [
     "2026-07",
@@ -1517,49 +1544,49 @@
    "timeB": []
   },
   "2026-11": {
-   "mes": "2026-11",
-   "mapa": {
-    "aranha": "r",
-    "dirceu": "r",
-    "junior": "r",
-    "anderson": "r",
-    "felipe": "r",
-    "nando": "r",
-    "davidson": "r",
-    "gilliard": "r",
-    "diego-miller": "r",
-    "bruno": "r",
-    "aldo": "b",
-    "deda": "b",
-    "fernando": "b",
-    "henrique": "b",
-    "serginho": "b",
-    "patinha": "b",
-    "leandro": "b",
-    "peterson": "b",
-    "marcao": "b",
-    "liminha": "b",
-    "tl": "b",
-    "elias": "r"
-   },
    "fixos": [
     {
      "nome": "Severo",
-     "time": "r",
-     "obs": "Goleiro"
+     "obs": "Goleiro",
+     "time": "r"
     },
     {
      "nome": "Caito",
-     "time": "r",
-     "obs": ""
+     "obs": "",
+     "time": "r"
     },
     {
      "nome": "Alê",
-     "time": "b",
-     "obs": "Goleiro"
+     "obs": "Goleiro",
+     "time": "b"
     }
-   ]
+   ],
+   "mapa": {
+    "aldo": "b",
+    "anderson": "r",
+    "aranha": "r",
+    "bruno": "r",
+    "davidson": "r",
+    "deda": "b",
+    "diego-miller": "r",
+    "dirceu": "r",
+    "elias": "r",
+    "felipe": "r",
+    "fernando": "b",
+    "gilliard": "r",
+    "henrique": "b",
+    "junior": "r",
+    "leandro": "b",
+    "liminha": "b",
+    "marcao": "b",
+    "nando": "r",
+    "patinha": "b",
+    "peterson": "b",
+    "serginho": "b",
+    "tl": "b"
+   },
+   "mes": "2026-11"
   }
  },
- "atualizadoEm": "07/11/2026 13:09"
+ "atualizadoEm": "10/11/2026 20:03"
 }
