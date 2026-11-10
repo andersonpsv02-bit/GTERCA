@@ -72,7 +72,7 @@
   .due .count span{font-size:13px; color:#C7CBD2;}
 
   /* ---------- kpis ---------- */
-  .kpis{display:grid; grid-template-columns:repeat(auto-fit, minmax(190px, 1fr)); gap:14px;}
+  .kpis{display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap:14px;}
   .kpi .rows2{display:flex; flex-direction:column; gap:3px; margin-top:6px; padding-top:8px; border-top:1px solid rgba(255,255,255,.22); font-size:12.5px;}
   .kpi .rows2 div{display:flex; justify-content:space-between; gap:8px;}
   .kpi .rows2 b{font-weight:800;}
@@ -93,6 +93,26 @@
   .kpi.cash .label, .kpi.cash .s{color:var(--grass-ink);}
   .kpi.cash.neg{background:var(--bad); border-color:var(--bad);}
   .kpi.cash.neg .label, .kpi.cash.neg .s{color:#FBE3E1;}
+  .kpi .rows2.bank{border-top-style:dashed;}
+  .kpi .rows2 .bk-ok{font-weight:800;}
+  .kpi .rows2 .bk-diff{font-weight:800; background:#fff; color:var(--bad); border-radius:6px; padding:0 6px;}
+  .kpi.mes .lines{display:flex; flex-direction:column; gap:8px; margin-top:2px;}
+  .kpi.mes .ln{display:flex; justify-content:space-between; align-items:baseline; gap:10px; font-size:14px;}
+  .kpi.mes .ln b{font-size:20px; font-weight:800; white-space:nowrap;}
+  .kpi.mes .ln > span{min-width:0;}
+  .kpi.mes .ln small{display:block; font-size:12.5px; color:var(--muted);}
+  .kpi.mes .ln.warn b{color:var(--warn);}
+
+  /* ---------- seções recolhíveis ---------- */
+  .fold > summary{list-style:none; cursor:pointer; display:flex; flex-wrap:wrap; align-items:center; gap:6px 14px; min-height:44px;}
+  .fold > summary::-webkit-details-marker{display:none;}
+  .fold > summary h2{margin:0; font-size:20px;}
+  .fold > summary .sum{font-size:14px; color:var(--ink-2); flex:1 1 220px;}
+  .fold > summary .tog{margin-left:auto; font-size:13px; font-weight:700; color:var(--grass); white-space:nowrap;}
+  .fold > summary .tog::after{content:" ▾"; display:inline-block; transition:transform .15s;}
+  .fold[open] > summary .tog::after{transform:rotate(180deg);}
+  .fold > summary:focus-visible{outline:2px solid var(--grass); outline-offset:4px; border-radius:6px;}
+  .fold[open] > summary{margin-bottom:14px;}
 
   .debts{display:flex; flex-wrap:wrap; align-items:center; gap:12px 18px; background:var(--warn-bg); border:1px solid var(--warn-line); border-radius:14px; padding:14px 18px; color:var(--warn-ink);}
   .debts .t{display:flex; flex-direction:column; gap:2px; flex:1 1 260px;}
@@ -199,8 +219,7 @@
   .lanc-add .btn{min-height:40px; padding:0 12px; font-size:13px;}
 
   /* ---------- rules ---------- */
-  .rules{display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:16px 24px;}
-  .rules h2{grid-column:1 / -1; margin:0; font-size:20px;}
+  .rules-body{display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:16px 24px;}
   .rule{display:grid; grid-template-columns:40px minmax(0, 1fr); gap:12px; align-items:start;}
   .rule .ic{width:40px; height:40px; border-radius:10px; display:inline-flex; align-items:center; justify-content:center; font-weight:800;}
   .rule strong{display:block; font-size:15px; margin-bottom:2px;}
@@ -358,20 +377,22 @@
     </section>
   </div>
 
-  <section class="card card-pad rules" aria-label="Regras">
-    <h2 class="anton">Regras dos Guerreiros</h2>
+  <details class="card card-pad fold" aria-label="Regras">
+    <summary><h2 class="anton">Regras dos Guerreiros</h2><span class="sum">Pagamento até o dia 10 · Mensalista R$ 55 · Avulso R$ 20</span><span class="tog">Ver regras</span></summary>
+    <div class="rules-body">
     <div class="rule"><span class="ic" style="background:#14161A;color:#F2BE1B">10</span><div><strong>Mensalidade até o dia 10</strong><span>Depois disso, multa de 20% e só joga após o pagamento.</span></div></div>
     <div class="rule"><span class="ic" style="background:#B3261E;color:#fff">2+</span><div><strong>Mais de 1 mensalidade em atraso</strong><span>O mensalista é cortado e não joga nem como avulso até pagar todo o débito.</span></div></div>
     <div class="prices">
       <div class="price"><span class="label">Mensalista</span><b>R$ 55</b><span>com multa, R$ 66</span></div>
       <div class="price"><span class="label">Avulso</span><b>R$ 20</b><span>por jogo · sem multa</span></div>
     </div>
-  </section>
+    </div>
+  </details>
 
-  <section class="card card-pad" aria-label="Histórico">
-    <div class="card-head"><h2 class="anton">Quanto sobrou a cada mês</h2><span class="muted" style="font-size:13px">arrecadado menos custos pagos</span></div>
+  <details class="card card-pad fold" aria-label="Histórico">
+    <summary><h2 class="anton">Meses anteriores</h2><span class="sum">quanto sobrou em cada mês</span><span class="tog">Ver meses</span></summary>
     <div class="hist" id="hist"></div>
-  </section>
+  </details>
 
   <p class="storage-note" id="storage-note" hidden>Armazenamento indisponível agora. As alterações não serão salvas nesta visita.</p>
   <p class="note"><span id="atualizado">Atualizado por Anderson</span> · somente leitura</p>
@@ -518,25 +539,26 @@
     var cAtual = custosDo(todayMonth()), aPagar = custoLinhas(cAtual).filter(function(d){ return d.key !== "uniforme"; })
       .reduce(function(a, d){ return a + Math.max(0, (cAtual[d.key] || 0) - pagoDe(cAtual, d.key)); }, 0);
     var saldoRows = aPagar > 0 ? '<div class="rows2"><div><span>Contas de '+MESES_LONGO[todayMonth().split("-")[1]]+' a pagar</span><b>'+brl(aPagar)+'</b></div><div><span>Depois de pagar tudo</span><b>'+brl(saldo - aPagar)+'</b></div></div>' : '';
-    var bankCard = "";
+    var bankRows = "";
     if (state.isOwner && state.bank.status !== "off"){
-      var b = state.bank, bv, bs;
+      var b = state.bank, bst;
       if (b.value != null){
         var dif = Math.round((b.value - saldo) * 100) / 100;
-        bv = brl(b.value);
-        bs = Math.abs(dif) < 1 ? '<span class="ok">Bate com o painel</span>' : '<span class="diff">Diferença de '+(dif > 0 ? "+ " : "")+brl(dif)+' para o painel</span>';
-        if (b.note) bs += ' · ' + esc(b.note);
+        bst = Math.abs(dif) < 1 ? '<span class="bk-ok">'+CHECK+'bate</span>' : '<span class="bk-diff">'+(dif > 0 ? "+ " : "")+brl(dif)+'</span>';
+        bankRows = '<div class="rows2 bank"><div><span>Conta PicPay '+brl(b.value)+'</span>'+bst+'</div></div>';
       } else {
-        bv = "—"; bs = esc(b.note || "consultando o PicPay…");
+        bankRows = '<div class="rows2 bank"><div><span>Conta PicPay</span><span>'+esc(b.note || "consultando…")+'</span></div></div>';
       }
-      bankCard = '<div class="kpi bank"><span class="label">Conta PicPay (real)</span><span class="v">'+bv+'</span><span class="s">'+bs+'</span></div>';
     }
+    var mesNome = MESES_LONGO[m.split("-")[1]];
     el.kpis.innerHTML =
-      '<div class="kpi"><span class="label">Arrecadado</span><span class="v">'+brl(mens+av+uni)+'</span><span class="s">'+brl(mens)+' mensal · '+brl(av)+' avulso'+(uni > 0 ? ' · '+brl(uni)+' uniforme' : '')+'</span></div>' +
-      '<div class="kpi warn"><span class="label">A receber</span><span class="v">'+brl(aRec)+'</span><span class="s">'+(nPend === 0 ? "ninguém devendo neste mês" : nPend + (nPend === 1 ? " pagamento pendente" : " pagamentos pendentes"))+'</span></div>' +
-      '<div class="kpi"><span class="label">Custos do mês</span><span class="v">'+brl(tot)+'</span><span class="s">'+custoSub+'</span></div>' +
-      '<div class="kpi res '+(res >= 0 ? "pos" : "neg")+'"><span class="label">Resultado do mês</span><span class="v">'+(res > 0 ? "+ " : "")+brl(res)+'</span><span class="tag">'+(res >= 0 ? "Lucro" : "Déficit")+'</span><span class="s">'+brl(arr)+' arrecadado − '+brl(pg)+' pagos'+(pgUni > 0 ? ' (inclui '+brl(pgUni)+' do uniforme)' : '')+'</span></div>' +
-      '<div class="kpi cash'+(saldo < 0 ? " neg" : "")+'"><span class="label">Saldo do caixa</span><span class="v">'+brl(saldo)+'</span><span class="s">'+esc(saldoSub)+'</span>'+saldoRows+'</div>' + bankCard;
+      '<div class="kpi cash'+(saldo < 0 ? " neg" : "")+'"><span class="label">Saldo do caixa</span><span class="v">'+brl(saldo)+'</span><span class="s">'+esc(saldoSub)+'</span>'+saldoRows+bankRows+'</div>' +
+      '<div class="kpi mes"><span class="label">'+esc(mesNome)+'</span><div class="lines">' +
+        '<div class="ln"><span>Arrecadado<small>'+brl(mens)+' mensal · '+brl(av)+' avulso'+(uni > 0 ? ' · '+brl(uni)+' camisa' : '')+'</small></span><b>'+brl(arr)+'</b></div>' +
+        '<div class="ln'+(aRec > 0 ? ' warn' : '')+'"><span>A receber<small>'+(nPend === 0 ? "ninguém devendo" : nPend + (nPend === 1 ? " pendente" : " pendentes"))+'</small></span><b>'+brl(aRec)+'</b></div>' +
+        '<div class="ln"><span>Custos pagos<small>de '+brl(tot)+' · quadra, juiz e bola</small></span><b>'+brl(pgFix)+'</b></div>' +
+      '</div></div>' +
+      '<div class="kpi res '+(res >= 0 ? "pos" : "neg")+'"><span class="label">Resultado do mês</span><span class="v">'+(res > 0 ? "+ " : "")+brl(res)+'</span><span class="tag">'+(res >= 0 ? "Lucro" : "Déficit")+'</span><span class="s">'+brl(arr)+' arrecadado − '+brl(pg)+' pagos'+(pgUni > 0 ? ' (inclui '+brl(pgUni)+' das camisas)' : '')+'</span></div>';
   }
 
   function renderDebts(){
@@ -613,7 +635,7 @@
     var uni = state.pagamentos.filter(function(p){ return p.tipo === "uniforme"; });
     var mesC = null; state.meses.slice().sort().forEach(function(m){ if (custosDo(m).uniforme > 0 && !mesC) mesC = m; });
     if (!uni.length || !mesC){ box.hidden = true; return; }
-    box.hidden = false;
+    var wasOpen = !!box.querySelector("details[open]");
     var c = custosDo(mesC), total = c.uniforme || 0;
     var caixa = (Array.isArray(c.uniformePagos) ? c.uniformePagos : []).reduce(function(a, v){ return a + (+v || 0); }, 0);
     var recebido = uni.reduce(function(a, p){ return a + (p.pago ? p.valor : 0); }, 0);
@@ -625,7 +647,9 @@
     uni.forEach(function(p){ var k = slug(p.nome); if (!por[k]){ por[k] = {nome:p.nome, m:{}}; ordem.push(k); } por[k].m[p.mes] = (por[k].m[p.mes] || []).concat([p]); });
     ordem.sort(function(a, b){ return por[a].nome.localeCompare(por[b].nome, "pt-BR"); });
     var quitados = ordem.filter(function(k){ return meses.every(function(m){ return (por[k].m[m] || []).every(function(p){ return p.pago; }) && (por[k].m[m] || []).length; }) || Object.keys(por[k].m).every(function(m){ return por[k].m[m].every(function(p){ return p.pago; }); }); }).length;
-    var head = '<div class="card-head"><h2 class="anton">Uniformes River x Boca</h2><span class="muted" style="font-size:13px">'+(c.uniformeObs ? esc(c.uniformeObs) : 'compra dos uniformes')+'</span></div>';
+    if (falta <= 0 && uni.every(function(p){ return p.pago; })){ box.hidden = true; return; }
+    box.hidden = false;
+    var head = '<summary><h2 class="anton">Camisas River x Boca</h2><span class="sum">'+brl(caixa)+' de '+brl(total)+' pagos ao fornecedor · faltam '+brl(falta)+'</span><span class="tog">Ver parcelas</span></summary>';
     var resumoU = '<div class="uni-sum">' +
       '<div><span class="label">Custo total</span><b>'+brl(total)+'</b></div>' +
       '<div><span class="label">Já pago ao fornecedor</span><b>'+brl(caixa)+'</b></div>' +
@@ -652,7 +676,7 @@
         }).join(" ") + '</span>';
       }).join("") + '</div>';
     }).join("");
-    box.innerHTML = head + resumoU + lancU + '<div class="uni-table" style="--cols:'+meses.length+'">' + rows + '</div>';
+    box.innerHTML = '<details class="fold"'+(wasOpen ? ' open' : '')+'>' + head + (c.uniformeObs ? '<p class="muted" style="margin:0 0 12px;font-size:13px">'+esc(c.uniformeObs)+'</p>' : '') + resumoU + lancU + '<div class="uni-table" style="--cols:'+meses.length+'">' + rows + '</div></details>';
   }
 
   function renderAvulsos(){
