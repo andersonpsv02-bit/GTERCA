@@ -526,14 +526,14 @@
 
   function renderKpis(){
     var m = state.current, pags = pagsDo(m);
-    var mens = 0, av = 0, uni = 0, aRec = 0, nPend = 0, nMensPago = 0, nAvPago = 0;
+    var mens = 0, av = 0, uni = 0, doa = 0, aRec = 0, nPend = 0, nMensPago = 0, nAvPago = 0;
     pags.forEach(function(p){
-      if (p.pago){ if (p.tipo === "avulso"){ av += p.valor; nAvPago++; } else if (p.tipo === "uniforme"){ uni += p.valor; } else { mens += p.valor; nMensPago++; } }
+      if (p.pago){ if (p.tipo === "avulso"){ av += p.valor; nAvPago++; } else if (p.tipo === "uniforme"){ uni += p.valor; } else if (p.tipo === "doacao"){ doa += p.valor; } else { mens += p.valor; nMensPago++; } }
       else { aRec += p.valor; nPend++; }
     });
     var tot = fixosTotal(m), pg = custosPagos(m), pgFix = fixosPagos(m), pgUni = pg - pgFix;
     var custoSub = (tot === 0 ? "sem custos lançados" : (pgFix === 0 ? "nada pago ainda" : (pgFix >= tot ? "tudo pago" : brl(pgFix) + " já pagos"))) + " · quadra, juiz e bola";
-    var arr = mens + av + uni, res = arr - pg;
+    var arr = mens + av + uni + doa, res = arr - pg;
     var saldo = saldoAcumulado(), adi = adiantados();
     var saldoSub = "desde julho" + (adi > 0 ? " · inclui " + brl(adi) + " adiantados" : "");
     var cAtual = custosDo(todayMonth()), aPagar = custoLinhas(cAtual).filter(function(d){ return d.key !== "uniforme"; })
@@ -554,7 +554,7 @@
     el.kpis.innerHTML =
       '<div class="kpi cash'+(saldo < 0 ? " neg" : "")+'"><span class="label">Saldo do caixa</span><span class="v">'+brl(saldo)+'</span><span class="s">'+esc(saldoSub)+'</span>'+saldoRows+bankRows+'</div>' +
       '<div class="kpi mes"><span class="label">'+esc(mesNome)+'</span><div class="lines">' +
-        '<div class="ln"><span>Arrecadado<small>'+brl(mens)+' mensal · '+brl(av)+' avulso'+(uni > 0 ? ' · '+brl(uni)+' camisa' : '')+'</small></span><b>'+brl(arr)+'</b></div>' +
+        '<div class="ln"><span>Arrecadado<small>'+brl(mens)+' mensal · '+brl(av)+' avulso'+(uni > 0 ? ' · '+brl(uni)+' camisa' : '')+(doa > 0 ? ' · '+brl(doa)+' doação' : '')+'</small></span><b>'+brl(arr)+'</b></div>' +
         '<div class="ln'+(aRec > 0 ? ' warn' : '')+'"><span>A receber<small>'+(nPend === 0 ? "ninguém devendo" : nPend + (nPend === 1 ? " pendente" : " pendentes"))+'</small></span><b>'+brl(aRec)+'</b></div>' +
         '<div class="ln"><span>Custos pagos<small>de '+brl(tot)+' · quadra, juiz e bola</small></span><b>'+brl(pgFix)+'</b></div>' +
       '</div></div>' +
@@ -979,7 +979,7 @@
   }
 
   function abrir(html){ sheet.innerHTML = html; ov.hidden = false; var f = sheet.querySelector("[data-focus]") || sheet.querySelector("button"); if (f) f.focus(); }
-  function whoHtml(p){ return '<div class="who"><span><b>'+esc(p.nome)+'</b><br><span class="muted">'+esc(p.tipo === "mensal" ? "Mensalidade" : (p.tipo === "avulso" ? "Avulso" : "Uniforme"))+' de '+esc(MESES_LONGO[p.mes.split("-")[1]])+' · '+brl(p.valor)+'</span></span></div>'; }
+  function whoHtml(p){ return '<div class="who"><span><b>'+esc(p.nome)+'</b><br><span class="muted">'+esc(p.tipo === "mensal" ? "Mensalidade" : (p.tipo === "avulso" ? "Avulso" : (p.tipo === "doacao" ? "Doação" : "Uniforme")))+' de '+esc(MESES_LONGO[p.mes.split("-")[1]])+' · '+brl(p.valor)+'</span></span></div>'; }
 
   function perguntarSemConsulta(p, motivo){
     abrir('<h3 class="anton" id="pix-title">Como foi o pagamento?</h3>' + whoHtml(p) +
@@ -1108,7 +1108,7 @@
       db.collection("pagamentos").onSnapshot(function(snap){
         state.pagamentos = snap.docs.map(function(d){
           var x = d.data() || {};
-          return { id:d.id, mes:x.mes, nome:x.nome || "?", tipo:x.tipo === "avulso" ? "avulso" : (x.tipo === "uniforme" ? "uniforme" : "mensal"), parcela:x.parcela || null, valor:typeof x.valor === "number" ? x.valor : 0, pago:!!x.pago,
+          return { id:d.id, mes:x.mes, nome:x.nome || "?", tipo:x.tipo === "avulso" ? "avulso" : (x.tipo === "uniforme" ? "uniforme" : (x.tipo === "doacao" ? "doacao" : "mensal")), parcela:x.parcela || null, valor:typeof x.valor === "number" ? x.valor : 0, pago:!!x.pago,
             forma: x.forma === "pix" || x.forma === "dinheiro" ? x.forma : null, pixRef: typeof x.pixRef === "string" ? x.pixRef : null, pixDe: typeof x.pixDe === "string" ? x.pixDe : null, pixData: typeof x.pixData === "string" ? x.pixData : null };
         });
         renderAll();
@@ -1130,6 +1130,7 @@
   boot();
 })();
 </script>
+
 
 
 

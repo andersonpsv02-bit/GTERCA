@@ -865,13 +865,6 @@
    "tipo": "uniforme",
    "valor": 15
   },
-  "2026-11__bruno": {
-   "mes": "2026-11",
-   "nome": "Bruno",
-   "pago": false,
-   "tipo": "mensal",
-   "valor": 55
-  },
   "2026-11__bruno__unif1": {
    "mes": "2026-11",
    "nome": "Bruno",
@@ -880,10 +873,34 @@
    "tipo": "uniforme",
    "valor": 15
   },
-  "2026-11__carioca__av0311h": {
+  "2026-11__carioca": {
+   "forma": "pix",
    "mes": "2026-11",
    "nome": "Carioca",
-   "pago": false,
+   "pago": true,
+   "pixData": "10 nov",
+   "pixDe": "Luiz Eduardo Carvalho Marcelino",
+   "pixRef": "pxcar1011a",
+   "tipo": "mensal",
+   "valor": 65
+  },
+  "2026-11__carioca__unif1": {
+   "forma": "pix",
+   "mes": "2026-11",
+   "nome": "Carioca",
+   "pago": true,
+   "parcela": 1,
+   "pixData": "10 nov",
+   "pixDe": "Luiz Eduardo Carvalho Marcelino",
+   "pixRef": "pxcar1011b",
+   "tipo": "uniforme",
+   "valor": 15
+  },
+  "2026-11__caua__av1011c": {
+   "forma": "dinheiro",
+   "mes": "2026-11",
+   "nome": "Cauã",
+   "pago": true,
    "tipo": "avulso",
    "valor": 20
   },
@@ -897,24 +914,36 @@
   "2026-11__davidson": {
    "mes": "2026-11",
    "nome": "Davidson",
-   "pago": false,
+   "pago": true,
    "tipo": "mensal",
-   "valor": 55
+   "valor": 70,
+   "forma": "pix",
+   "pixDe": "Davidson Ribeiro Eufrasio",
+   "pixData": "17 nov",
+   "pixRef": "px1ipqgx23m"
   },
   "2026-11__davidson__unif1": {
    "mes": "2026-11",
    "nome": "Davidson",
-   "pago": false,
+   "pago": true,
    "parcela": 1,
    "tipo": "uniforme",
-   "valor": 15
+   "valor": 15,
+   "forma": "pix",
+   "pixDe": "Davidson Ribeiro Eufrasio",
+   "pixData": "17 nov",
+   "pixRef": "px1a02gae3m"
   },
   "2026-11__deda": {
+   "forma": "pix",
    "mes": "2026-11",
    "nome": "Deda",
-   "pago": false,
+   "pago": true,
+   "pixData": "10 nov",
+   "pixDe": "56.959.525 JHEFFERSON DE SOUSA SILVA",
+   "pixRef": "pxded1011a",
    "tipo": "mensal",
-   "valor": 55
+   "valor": 60
   },
   "2026-11__deda__unif1": {
    "mes": "2026-11",
@@ -923,6 +952,17 @@
    "parcela": 1,
    "tipo": "uniforme",
    "valor": 15
+  },
+  "2026-11__denys__av1011a": {
+   "forma": "pix",
+   "mes": "2026-11",
+   "nome": "Denys",
+   "pago": true,
+   "pixData": "10 nov",
+   "pixDe": "DENYS DA SILVA CARVALHO",
+   "pixRef": "pxden1011a",
+   "tipo": "avulso",
+   "valor": 20
   },
   "2026-11__diego-miller": {
    "mes": "2026-11",
@@ -936,6 +976,29 @@
    "nome": "Diego Miller",
    "pago": false,
    "parcela": 1,
+   "tipo": "uniforme",
+   "valor": 15
+  },
+  "2026-11__dieguinho": {
+   "forma": "pix",
+   "mes": "2026-11",
+   "nome": "Dieguinho",
+   "pago": true,
+   "pixData": "10 nov",
+   "pixDe": "DIEGO DE JESUS FERREIRA",
+   "pixRef": "pxdie1011a",
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-11__dieguinho__unif1": {
+   "forma": "pix",
+   "mes": "2026-11",
+   "nome": "Dieguinho",
+   "pago": true,
+   "parcela": 1,
+   "pixData": "10 nov",
+   "pixDe": "DIEGO DE JESUS FERREIRA",
+   "pixRef": "pxdie1011b",
    "tipo": "uniforme",
    "valor": 15
   },
@@ -954,20 +1017,44 @@
    "tipo": "uniforme",
    "valor": 15
   },
+  "2026-11__edson__av1711b": {
+   "mes": "2026-11",
+   "nome": "Edson",
+   "tipo": "avulso",
+   "valor": 20,
+   "pago": true,
+   "forma": "pix",
+   "pixDe": "EDSON FLORENCIO",
+   "pixData": "18 nov",
+   "pixRef": "px1apcudp3m"
+  },
   "2026-11__elias": {
+   "forma": "dinheiro",
    "mes": "2026-11",
    "nome": "Elias",
-   "pago": false,
+   "pago": true,
    "tipo": "mensal",
    "valor": 55
   },
   "2026-11__elias__unif1": {
+   "forma": "dinheiro",
    "mes": "2026-11",
    "nome": "Elias",
-   "pago": false,
+   "pago": true,
    "parcela": 1,
    "tipo": "uniforme",
    "valor": 15
+  },
+  "2026-11__felipe-dos-anjos__av1711a": {
+   "mes": "2026-11",
+   "nome": "Felipe dos Anjos",
+   "tipo": "avulso",
+   "valor": 20,
+   "pago": true,
+   "forma": "pix",
+   "pixDe": "Felipe dos Anjos Constança",
+   "pixData": "17 nov",
+   "pixRef": "pxgfnywl3m"
   },
   "2026-11__felipe": {
    "mes": "2026-11",
@@ -1007,39 +1094,70 @@
    "valor": 20
   },
   "2026-11__gilliard": {
+   "forma": "pix",
    "mes": "2026-11",
    "nome": "Gilliard",
-   "pago": false,
+   "pago": true,
+   "pixData": "10 nov",
+   "pixDe": "GILLIARD RODRIGUES DOS SANTOS",
+   "pixRef": "pxgil1011a",
    "tipo": "mensal",
    "valor": 55
   },
-  "2026-11__gilliard__unif1": {
+  "2026-11__gilliard__doa1011": {
+   "forma": "pix",
    "mes": "2026-11",
    "nome": "Gilliard",
-   "pago": false,
+   "pago": true,
+   "pixData": "10 nov",
+   "pixDe": "GILLIARD RODRIGUES DOS SANTOS",
+   "pixRef": "pxgil1011d",
+   "tipo": "doacao",
+   "valor": 100
+  },
+  "2026-11__gilliard__unif1": {
+   "forma": "pix",
+   "mes": "2026-11",
+   "nome": "Gilliard",
+   "pago": true,
    "parcela": 1,
+   "pixData": "10 nov",
+   "pixDe": "GILLIARD RODRIGUES DOS SANTOS",
+   "pixRef": "pxgil1011b",
    "tipo": "uniforme",
    "valor": 15
   },
-  "2026-11__henrique": {
+  "2026-11__guilherme__av1011a": {
+   "forma": "pix",
    "mes": "2026-11",
-   "nome": "Henrique",
-   "pago": false,
-   "tipo": "mensal",
-   "valor": 55
-  },
-  "2026-11__henrique__av0311a": {
-   "mes": "2026-11",
-   "nome": "Nicanor",
+   "nome": "Guilherme",
    "pago": true,
+   "pixData": "10 nov",
+   "pixDe": "Marcos Lima da Silva",
+   "pixRef": "pxgui1011a",
    "tipo": "avulso",
    "valor": 20
   },
-  "2026-11__henrique__unif1": {
+  "2026-11__henrique": {
+   "forma": "pix",
    "mes": "2026-11",
    "nome": "Henrique",
-   "pago": false,
+   "pago": true,
+   "pixData": "10 nov",
+   "pixDe": "Henrique Maia Augusto",
+   "pixRef": "pxhen1011a",
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-11__henrique__unif1": {
+   "forma": "pix",
+   "mes": "2026-11",
+   "nome": "Henrique",
+   "pago": true,
    "parcela": 1,
+   "pixData": "10 nov",
+   "pixDe": "Henrique Maia Augusto",
+   "pixRef": "pxhen1011b",
    "tipo": "uniforme",
    "valor": 15
   },
@@ -1050,18 +1168,34 @@
    "tipo": "avulso",
    "valor": 20
   },
+  "2026-11__jone__av1011j": {
+   "forma": "dinheiro",
+   "mes": "2026-11",
+   "nome": "Jone",
+   "pago": true,
+   "tipo": "avulso",
+   "valor": 20
+  },
   "2026-11__junior": {
+   "forma": "pix",
    "mes": "2026-11",
    "nome": "Junior",
-   "pago": false,
+   "pago": true,
+   "pixData": "10 nov",
+   "pixDe": "Imanuel Carlos Sergio Junior",
+   "pixRef": "pxjun1011a",
    "tipo": "mensal",
    "valor": 55
   },
   "2026-11__junior__unif1": {
+   "forma": "pix",
    "mes": "2026-11",
    "nome": "Junior",
-   "pago": false,
+   "pago": true,
    "parcela": 1,
+   "pixData": "10 nov",
+   "pixDe": "Imanuel Carlos Sergio Junior",
+   "pixRef": "pxjun1011b",
    "tipo": "uniforme",
    "valor": 15
   },
@@ -1087,9 +1221,9 @@
    "pago": true,
    "pixData": "10 nov",
    "pixDe": "David Gonçalves Lima",
-   "pixRef": "px1t13vf03m",
+   "pixRef": "px1oyr2xi3m",
    "tipo": "mensal",
-   "valor": 55
+   "valor": 60
   },
   "2026-11__liminha__unif1": {
    "forma": "pix",
@@ -1127,61 +1261,111 @@
    "valor": 15
   },
   "2026-11__nando": {
+   "forma": "pix",
    "mes": "2026-11",
    "nome": "Nando",
-   "pago": false,
+   "pago": true,
+   "pixData": "10 nov",
+   "pixDe": "Luiz Fernando Santos de Farias",
+   "pixRef": "pxnan1011a",
    "tipo": "mensal",
    "valor": 55
   },
   "2026-11__nando__unif1": {
+   "forma": "pix",
    "mes": "2026-11",
    "nome": "Nando",
-   "pago": false,
+   "pago": true,
    "parcela": 1,
+   "pixData": "10 nov",
+   "pixDe": "Luiz Fernando Santos de Farias",
+   "pixRef": "pxnan1011b",
+   "tipo": "uniforme",
+   "valor": 15
+  },
+  "2026-11__neves__av1011n": {
+   "forma": "dinheiro",
+   "mes": "2026-11",
+   "nome": "Neves",
+   "pago": true,
+   "tipo": "avulso",
+   "valor": 20
+  },
+  "2026-11__nicanor": {
+   "forma": "dinheiro",
+   "mes": "2026-11",
+   "nome": "Nicanor",
+   "obs": "R$ 70 (mensal + uniforme) = R$ 20 na semana passada + R$ 20 em dinheiro em 10/11 + R$ 30 no Pix de 10/11",
+   "pago": true,
+   "tipo": "mensal",
+   "valor": 55
+  },
+  "2026-11__nicanor__unif1": {
+   "forma": "pix",
+   "mes": "2026-11",
+   "nome": "Nicanor",
+   "pago": true,
+   "parcela": 1,
+   "pixData": "10 nov",
+   "pixDe": "HENRIQUE DOMINGOS JOSE DOS SANTOS",
+   "pixRef": "pxnic1011u",
    "tipo": "uniforme",
    "valor": 15
   },
   "2026-11__patinha": {
+   "forma": "dinheiro",
    "mes": "2026-11",
    "nome": "Patinha",
-   "pago": false,
+   "pago": true,
    "tipo": "mensal",
    "valor": 55
   },
   "2026-11__patinha__unif1": {
+   "forma": "dinheiro",
    "mes": "2026-11",
    "nome": "Patinha",
-   "pago": false,
+   "pago": true,
    "parcela": 1,
    "tipo": "uniforme",
    "valor": 15
   },
   "2026-11__peterson": {
+   "forma": "pix",
    "mes": "2026-11",
    "nome": "Peterson",
-   "pago": false,
+   "pago": true,
+   "pixData": "10 nov",
+   "pixDe": "PETERSON NUNES DOS SANTOS",
+   "pixRef": "pxpet1011a",
    "tipo": "mensal",
    "valor": 55
   },
   "2026-11__peterson__unif1": {
+   "forma": "pix",
    "mes": "2026-11",
    "nome": "Peterson",
-   "pago": false,
+   "pago": true,
    "parcela": 1,
+   "pixData": "10 nov",
+   "pixDe": "PETERSON NUNES DOS SANTOS",
+   "pixRef": "pxpet1011b",
    "tipo": "uniforme",
    "valor": 15
   },
   "2026-11__serginho": {
+   "forma": "dinheiro",
    "mes": "2026-11",
    "nome": "Serginho",
-   "pago": false,
+   "obs": "R$ 70 (mensal + uniforme) = R$ 30 por Pix em outra conta na semana passada + R$ 40 em dinheiro em 10/11",
+   "pago": true,
    "tipo": "mensal",
    "valor": 55
   },
   "2026-11__serginho__unif1": {
+   "forma": "dinheiro",
    "mes": "2026-11",
    "nome": "Serginho",
-   "pago": false,
+   "pago": true,
    "parcela": 1,
    "tipo": "uniforme",
    "valor": 15
@@ -1210,7 +1394,7 @@
   },
   "2026-11__vinicius__av0311c": {
    "mes": "2026-11",
-   "nome": "Vinicius",
+   "nome": "Neves",
    "pago": true,
    "tipo": "avulso",
    "valor": 20
@@ -1281,6 +1465,14 @@
   "2026-12__diego-miller__unif2": {
    "mes": "2026-12",
    "nome": "Diego Miller",
+   "pago": false,
+   "parcela": 2,
+   "tipo": "uniforme",
+   "valor": 15
+  },
+  "2026-12__dieguinho__unif2": {
+   "mes": "2026-12",
+   "nome": "Dieguinho",
    "pago": false,
    "parcela": 2,
    "tipo": "uniforme",
@@ -1468,6 +1660,8 @@
    "juiz": 320,
    "juizPago": false,
    "juizPagos": [
+    80,
+    80,
     80
    ],
    "mes": "2026-11",
@@ -1496,11 +1690,22 @@
  "config": {
   "apelidos": {
    "mapa": {
+    "56.959.525 jhefferson de sousa silva": "deda",
     "danilo": "duff",
+    "david goncalves lima": "liminha",
+    "denys da silva carvalho": "denys",
     "diego vitorio": "suarez",
+    "gilliard rodrigues dos santos": "gilliard",
     "henrique domingos": "nicanor",
+    "henrique domingos jose dos santos": "nicanor",
+    "henrique maia augusto": "henrique",
+    "imanuel carlos sergio junior": "junior",
+    "jhefferson de sousa silva": "deda",
     "luciano cardoso barbosa": "aranha",
+    "luiz eduardo carvalho marcelino": "carioca",
+    "luiz fernando santos de farias": "nando",
     "marcos lima da silva": "marcao",
+    "peterson nunes dos santos": "peterson",
     "vanderlei": "wanderley-neto",
     "wanderley": "wanderley-neto"
    }
@@ -1575,9 +1780,11 @@
     "anderson": "r",
     "aranha": "r",
     "bruno": "r",
+    "carioca": "r",
     "davidson": "r",
     "deda": "b",
     "diego-miller": "r",
+    "dieguinho": "r",
     "dirceu": "r",
     "elias": "r",
     "felipe": "r",
@@ -1589,6 +1796,7 @@
     "liminha": "b",
     "marcao": "b",
     "nando": "r",
+    "nicanor": "b",
     "patinha": "b",
     "peterson": "b",
     "serginho": "b",
@@ -1597,5 +1805,5 @@
    "mes": "2026-11"
   }
  },
- "atualizadoEm": "10/11/2026 20:21"
+ "atualizadoEm": "18/11/2026 14:27"
 }
