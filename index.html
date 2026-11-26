@@ -10,7 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Orbitron:wght@600;700;800;900&family=Chakra+Petch:wght@500;600;700&family=Exo+2:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
     color-scheme: light;
@@ -321,6 +321,33 @@
   .hbar i{background:var(--accent-3);}
   .hbar{border-bottom-color:var(--line);}
   .row:hover, .cost:hover{background:#fafbfc;}
+
+
+  /* ===== Tipografia igual ao painel Recebimento de BL Original ===== */
+  :root{ --hero:"Orbitron","Chakra Petch",system-ui,sans-serif; --display:"Chakra Petch","Exo 2",system-ui,sans-serif; --body:"Exo 2",system-ui,-apple-system,"Segoe UI",sans-serif; }
+  body{font-family:var(--body); font-size:14.5px;}
+  .brand h1, .brand h1.anton{font:900 clamp(26px,3.4vw,42px)/1.08 var(--hero); letter-spacing:.015em; text-transform:uppercase; text-shadow:0 2px 6px rgba(0,0,0,.25);}
+  .brand .eyebrow{font:600 12px var(--display); letter-spacing:.3em;}
+  .brand .sub{font-family:var(--body);}
+  .vs .side{font-family:var(--display); letter-spacing:.12em;}
+  .vs .x{font-family:var(--hero); font-weight:800;}
+  .label, .kpi .label{font:700 13px var(--display); letter-spacing:.14em; text-transform:uppercase;}
+  .card-head h2, .fold > summary h2{font:700 15px var(--display); letter-spacing:.16em; text-transform:uppercase;}
+  .team-head h2, .team-head h2.anton{font:700 20px var(--display); letter-spacing:.12em; text-transform:uppercase;}
+  .kpi .v{font:800 32px/1.1 var(--hero); letter-spacing:.01em;}
+  .kpi.mes .ln b{font:800 17px var(--hero);}
+  .kpi.res .tag{font-family:var(--display); letter-spacing:.1em;}
+  .due .cal b{font:800 24px/1 var(--hero);}
+  .due .cal span{font-family:var(--display);}
+  .due .txt strong{font:700 16px var(--display); letter-spacing:.04em;}
+  .due .count b{font:800 24px var(--hero);}
+  .debts .v, .uni-sum b, .price b, .cost-total b{font-family:var(--hero); font-weight:800;}
+  .debts .t strong, .cost-total span, .uni-th, .hlab .m, .rule strong{font-family:var(--display); letter-spacing:.08em;}
+  .month, .month-add, .ro-badge, .chip, .btn, .game, .team-btn, .fold > summary .tog, .lanc-item{font-family:var(--display); letter-spacing:.05em;}
+  .chip{font-size:13.5px;}
+  .row .val, .cost .v, .hlab .s{font-family:var(--hero); font-weight:700; font-size:13px;}
+  .row .nome, .cost .n, .uni-row .nome{font-family:var(--body);}
+  .note{font-family:var(--display); letter-spacing:.04em;}
 
   @media (max-width:640px){
     .top-in, main{padding-left:16px; padding-right:16px;}
