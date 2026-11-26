@@ -1658,8 +1658,9 @@
    "bola": 200,
    "bolaPago": false,
    "juiz": 320,
-   "juizPago": false,
+   "juizPago": true,
    "juizPagos": [
+    80,
     80,
     80,
     80
@@ -1669,11 +1670,12 @@
    "quadraPago": true,
    "semBola": false,
    "uniforme": 960,
-   "uniformeObs": "R$ 200 do caixa + R$ 135 das primeiras parcelas já repassados · restante conforme as parcelas de R$ 15 (nov e dez)",
+   "uniformeObs": "R$ 200 do caixa + R$ 135 das primeiras parcelas + R$ 300 em 26/11 já repassados · restante conforme as parcelas de R$ 15 (nov e dez)",
    "uniformePago": false,
    "uniformePagos": [
     200,
-    135
+    135,
+    300
    ],
    "bolaPagos": [
     150
@@ -1808,5 +1810,5 @@
    "mes": "2026-11"
   }
  },
- "atualizadoEm": "18/11/2026 15:33"
+ "atualizadoEm": "26/11/2026 17:48"
 }
