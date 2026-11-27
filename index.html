@@ -349,6 +349,74 @@
   .row .nome, .cost .n, .uni-row .nome{font-family:var(--body);}
   .note{font-family:var(--display); letter-spacing:.04em;}
 
+
+  /* ===== Modo escuro neon (segue o celular; botão no topo troca) ===== */
+  .theme-btn{display:inline-flex; align-items:center; gap:8px; min-height:44px; padding:0 14px; border:1px solid rgba(255,255,255,.35); border-radius:8px; background:rgba(6,18,10,.45); color:#fff; font:700 13px var(--display); letter-spacing:.08em; text-transform:uppercase; cursor:pointer;}
+  .theme-btn svg{width:18px; height:18px;}
+  .theme-btn:focus-visible{outline:2px solid #fff; outline-offset:2px;}
+  .hdr-right{display:flex; align-items:center; gap:14px; flex-wrap:wrap;}
+  :root[data-theme="dark"]{
+    color-scheme:dark;
+    --bg:#080C14; --surface:#101725; --surface-2:#151E30; --raised:#1B2640; --line:#26324D; --line-soft:#1B2640;
+    --ink:#E9EFFA; --ink-2:#C3CDE0; --muted:#8E9CBC;
+    --accent-1:#22D8FF; --accent-1-ink:#22D8FF; --accent-3:#37FFA0;
+    --ok:#37FFA0; --ok-bg:#0E2B21; --warn:#FFD34D; --warn-ink:#FFD34D; --warn-bg:#2F2511; --warn-line:#7A6214; --bad:#FF5C8A;
+    --bd-a:rgba(0,229,255,.30);
+    --shadow:0 0 0 1px rgba(0,229,255,.14),0 0 24px -10px rgba(0,229,255,.55);
+    --glow-c:0 0 3px rgba(0,229,255,.9),0 0 13px rgba(0,229,255,.7),0 0 30px rgba(0,229,255,.4);
+    --glow-g:0 0 3px rgba(55,255,160,.9),0 0 13px rgba(55,255,160,.7),0 0 30px rgba(55,255,160,.4);
+    --glow-r:0 0 3px rgba(255,92,138,.9),0 0 13px rgba(255,92,138,.7),0 0 30px rgba(255,92,138,.4);
+    --glow-y:0 0 3px rgba(255,211,77,.9),0 0 12px rgba(255,211,77,.6);
+  }
+  :root[data-theme="dark"] body{background-color:var(--bg); background-image:linear-gradient(rgba(0,229,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,.045) 1px,transparent 1px),radial-gradient(900px 620px at 100% 0,rgba(0,229,255,.08),transparent 62%),radial-gradient(800px 600px at 0 100%,rgba(255,45,149,.06),transparent 60%); background-size:46px 46px,46px 46px,100% 100%,100% 100%; background-attachment:fixed;}
+  :root[data-theme="dark"] .brand h1{text-shadow:0 0 2px rgba(255,255,255,.6),0 0 14px rgba(0,229,255,.7),0 0 36px rgba(0,229,255,.4);}
+  :root[data-theme="dark"] .card, :root[data-theme="dark"] .kpi, :root[data-theme="dark"] .admin, :root[data-theme="dark"] .due, :root[data-theme="dark"] .month, :root[data-theme="dark"] .ro-badge{border-color:var(--bd-a); box-shadow:var(--shadow);}
+  :root[data-theme="dark"] .month, :root[data-theme="dark"] .ro-badge, :root[data-theme="dark"] .btn, :root[data-theme="dark"] .field input, :root[data-theme="dark"] .field select, :root[data-theme="dark"] .lanc-add input{background:var(--surface); color:var(--ink-2);}
+  :root[data-theme="dark"] .month.active{background:transparent; border-color:var(--accent-1); color:var(--accent-1); text-shadow:var(--glow-c); box-shadow:0 0 0 1px var(--accent-1),0 0 18px -2px rgba(0,229,255,.6);}
+  :root[data-theme="dark"] .month.future{background:transparent; border-color:#3A4A6E; box-shadow:none;}
+  :root[data-theme="dark"] .due{background:var(--surface); color:var(--ink); border-left-color:var(--accent-1);}
+  :root[data-theme="dark"] .due .count b{color:var(--accent-1); text-shadow:var(--glow-c);}
+  :root[data-theme="dark"] .due .cal{box-shadow:0 0 18px -2px rgba(242,190,27,.7);}
+  :root[data-theme="dark"] .kpi .v{text-shadow:var(--glow-c);}
+  :root[data-theme="dark"] .kpi.cash{background:linear-gradient(180deg,rgba(55,255,160,.10),rgba(55,255,160,.02)),var(--surface); border-color:rgba(55,255,160,.55); box-shadow:0 0 0 1px rgba(55,255,160,.25),0 0 28px -8px rgba(55,255,160,.6);}
+  :root[data-theme="dark"] .kpi.cash .v{color:var(--ok); text-shadow:var(--glow-g);}
+  :root[data-theme="dark"] .kpi.cash .label, :root[data-theme="dark"] .kpi.cash .s{color:#A9E9C9;}
+  :root[data-theme="dark"] .kpi .rows2{border-top-color:rgba(55,255,160,.25);}
+  :root[data-theme="dark"] .kpi.res.pos .v{color:var(--ok); text-shadow:var(--glow-g);}
+  :root[data-theme="dark"] .kpi.res.neg .v{color:var(--bad); text-shadow:var(--glow-r);}
+  :root[data-theme="dark"] .kpi.res.pos .tag{box-shadow:0 0 10px -2px rgba(55,255,160,.6);}
+  :root[data-theme="dark"] .kpi.mes .ln b{text-shadow:var(--glow-c);}
+  :root[data-theme="dark"] .kpi.mes .ln.warn b{color:var(--warn); text-shadow:var(--glow-y);}
+  :root[data-theme="dark"] .debts{background:var(--warn-bg); border-color:var(--warn-line); color:var(--warn); box-shadow:0 0 22px -10px rgba(255,211,77,.6);}
+  :root[data-theme="dark"] .debts .v{text-shadow:var(--glow-y);}
+  :root[data-theme="dark"] .team-head.river{background:var(--surface); border-bottom-color:var(--line);}
+  :root[data-theme="dark"] .team-head.river .band{box-shadow:0 0 16px rgba(255,40,60,.8);}
+  :root[data-theme="dark"] .team-head.river h2{text-shadow:0 0 12px rgba(255,60,80,.55);}
+  :root[data-theme="dark"] .team-head.boca{box-shadow:inset 0 -8px 18px -12px rgba(242,190,27,.8);}
+  :root[data-theme="dark"] .team-head.boca .band{box-shadow:0 0 14px rgba(242,190,27,.8);}
+  :root[data-theme="dark"] .team-head.boca h2{text-shadow:0 0 12px rgba(242,190,27,.55);}
+  :root[data-theme="dark"] .team-head.none{background:var(--surface-2); border-bottom-color:var(--line);}
+  :root[data-theme="dark"] .chip.ok{background:var(--ok-bg); color:var(--ok); text-shadow:0 0 8px rgba(55,255,160,.6); box-shadow:0 0 0 1px rgba(55,255,160,.35),0 0 14px -3px rgba(55,255,160,.55);}
+  :root[data-theme="dark"] .chip.pend{background:var(--warn-bg); color:var(--warn); text-shadow:0 0 8px rgba(255,211,77,.5); box-shadow:0 0 0 1px rgba(255,211,77,.35),0 0 14px -3px rgba(255,211,77,.5);}
+  :root[data-theme="dark"] .chip.none{background:var(--raised); color:var(--muted);}
+  :root[data-theme="dark"] .lanc-item{background:var(--ok-bg); color:var(--ok); box-shadow:0 0 10px -3px rgba(55,255,160,.5);}
+  :root[data-theme="dark"] .row:hover, :root[data-theme="dark"] .cost:hover{background:var(--surface-2);}
+  :root[data-theme="dark"] .row .val, :root[data-theme="dark"] .cost .v{color:var(--ink-2);}
+  :root[data-theme="dark"] .cost-total{border-top-color:var(--accent-1);}
+  :root[data-theme="dark"] .cost-total b{text-shadow:var(--glow-c);}
+  :root[data-theme="dark"] .cost-paid b{text-shadow:var(--glow-g);}
+  :root[data-theme="dark"] .uni-sum > div, :root[data-theme="dark"] .price{background:var(--surface-2);}
+  :root[data-theme="dark"] .uni-sum b{text-shadow:var(--glow-c);}
+  :root[data-theme="dark"] .fold > summary .tog{color:var(--accent-1); text-shadow:var(--glow-c);}
+  :root[data-theme="dark"] .card-head h2, :root[data-theme="dark"] .fold > summary h2{text-shadow:0 0 10px rgba(0,229,255,.35);}
+  :root[data-theme="dark"] .hbar{border-bottom-color:var(--line);}
+  :root[data-theme="dark"] .hbar i{background:linear-gradient(180deg,#8CFFD0,#37FFA0 50%,#13B874); box-shadow:0 0 14px rgba(55,255,160,.5);}
+  :root[data-theme="dark"] .hneg{box-shadow:0 0 14px rgba(255,92,138,.5);}
+  :root[data-theme="dark"] .btn.primary{background:transparent; border-color:var(--accent-1); color:var(--accent-1); box-shadow:0 0 14px -3px rgba(0,229,255,.6);}
+  :root[data-theme="dark"] .row .nome small.pix{color:#B98CFF;}
+  :root[data-theme="dark"] .tx:has(input:checked){background:#241A3D;}
+  :root[data-theme="dark"] .note{color:var(--muted);}
+
   @media (max-width:640px){
     .top-in, main{padding-left:16px; padding-right:16px;}
     .brand h1{font-size:34px;}
@@ -403,6 +471,8 @@
         <div class="sub">Mensalidades, avulsos e custos da pelada</div>
       </div>
     </div>
+    <div class="hdr-right">
+    <button type="button" class="theme-btn" id="theme-btn" aria-label="Trocar entre modo claro e escuro"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><span id="theme-lbl">Modo neon</span></button>
     <div class="vs">
       <div class="side">
         <svg width="64" height="64" viewBox="0 0 100 100" role="img" aria-label="Camisa do River Plate"><defs><clipPath id="hR"><path d="M30 10 L42 6 Q50 13 58 6 L70 10 L91 25 L81 41 L72 35 L72 93 L28 93 L28 35 L19 41 L9 25 Z"/></clipPath></defs><path d="M30 10 L42 6 Q50 13 58 6 L70 10 L91 25 L81 41 L72 35 L72 93 L28 93 L28 35 L19 41 L9 25 Z" fill="#fff"/><g clip-path="url(#hR)"><path d="M10 30 L34 6 L96 76 L72 100 Z" fill="#C8102E"/></g></svg>
@@ -414,8 +484,29 @@
         Boca
       </div>
     </div>
+    </div>
   </div>
 </header>
+<script>
+/* tema: segue o celular, ou a escolha salva neste aparelho */
+(function(){
+  var root = document.documentElement, mq = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null, pref = null;
+  try { pref = localStorage.getItem("gterca-tema"); } catch(e) {}
+  function aplicar(){
+    var t = pref || (mq && mq.matches ? "dark" : "light");
+    root.setAttribute("data-theme", t);
+    var l = document.getElementById("theme-lbl"); if (l) l.textContent = t === "dark" ? "Modo claro" : "Modo neon";
+  }
+  aplicar();
+  if (mq && mq.addEventListener) mq.addEventListener("change", function(){ if (!pref) aplicar(); });
+  var b = document.getElementById("theme-btn");
+  if (b) b.addEventListener("click", function(){
+    pref = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    try { localStorage.setItem("gterca-tema", pref); } catch(e) {}
+    aplicar();
+  });
+})();
+</script>
 
 <main>
   <nav class="months" id="months" aria-label="Meses"></nav>
